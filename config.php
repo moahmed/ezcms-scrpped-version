@@ -3,7 +3,7 @@
 
 	// Database Connection Setting
 	$databaseServer = 'localhost';
-	$databaseUser   = 'root';
+	$databaseUser   = '';
 	$databasePasswd = '';	
 	$databaseName   = 'ezSite_db';
 	

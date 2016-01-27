@@ -10,12 +10,16 @@
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
 -- Database: `ezsite_db`
 --
+
+create database ezsite_db;  
+use ezsite_db;
 
 -- --------------------------------------------------------
 
