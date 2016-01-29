@@ -20,4 +20,9 @@
 	@mysql_select_db($databaseName)
 		or die("<h1>Site down for maintenance.</h1><p>Please visit us later !</p>");
   
+define('APP_NAME', "ezcms");  
+define('HTTP_SERVER', 'http://localhost/'); 
+define('SITE_NAME', 'http://localhost/');   
+define('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT'].APP_NAME); 
+
 ?>
