@@ -44,17 +44,6 @@
 		  <li class="active"><a href="pages.php"><i class="icon-file"></i> Pages</a></li>
 		  <li><a href="users.php"><i class="icon-user"></i> Users</a></li>
 		  
-		  <li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-wrench"></i> Tracking <b class="caret"></b></a>
-			  <ul class="dropdown-menu">
-				<li><a href="traffic.php"><i class="icon-signal"></i> Traffic Analysis<br>
-					<img align="middle" height="90" alt="phpTrafficA statistics" src="traffic/imagestats.php?sid=39547">
-				</a></li>
-				<li class="divider"></li>
-				<li><a href="options.php"><i class="icon-book"></i> Tracking Options</a></li>
-				
-			  </ul>
-		  </li>
 		</ul>
 		
 		<ul class="nav pull-right">
