@@ -16,18 +16,18 @@ class db extends PDO {
 		$DB_NAME = 'ezSite_db';
 		
 		/** MySQL database username */
-		$DB_USER = 'root');
+		$DB_USER = 'root';
 		
 		/** MySQL database password */
-		$DB_PASSWORD = '');
+		$DB_PASSWORD = '';
 		
 		/** MySQL hostname */
-		$DB_HOST = 'localhost');		
+		$DB_HOST = 'localhost';		
 		
 		try {
 		
 			/** MySQL Connect */
-			parent::__construct("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS );
+			parent::__construct("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASSWORD );
 						
 		} catch (PDOException $e) { 
 		

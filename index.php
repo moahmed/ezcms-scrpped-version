@@ -55,7 +55,7 @@ $stmt->execute( array($uri) );
 if ($stmt->rowCount()) { 
 	
 	// Page is found in Database
-	$page = $sth->fetch(PDO::FETCH_ASSOC);
+	$page = $stmt->fetch(PDO::FETCH_ASSOC);
 	
 	// Check if page is published or not.
 	if (!$page["published"]) { 
@@ -90,7 +90,7 @@ if (!file_exists($page['layout'])) {
 }
 
 // build canonical URL
-$page['canonical'] = $protocol.$_SERVER['HTTP_HOST'] . $arr["url"];
+$page['canonical'] = $protocol.$_SERVER['HTTP_HOST'] . $page["url"];
 
 // Setup CMS Template variable to be used in the layouts
 $head        = $page["head"];
@@ -99,7 +99,7 @@ $canonical   = $page["canonical"];
 $keywords    = $page["keywords"];
 $description = $page["description"];
 $maincontent = $page["maincontent"];
-$header      = ($page["useheader"] == 1) ? $page["header"]        : $site["header"];
+$header      = ($page["useheader"] == 1) ? $page["headercontent"] : $site["headercontent"];
 $sidebar     = ($page["useside"]   == 1) ? $page["sidecontent"]   : $site["sidecontent"];
 $siderbar    = ($page["usesider"]  == 1) ? $page["sidercontent"]  : $site["sidercontent"];
 $footer      = ($page["usefooter"] == 1) ? $page["footercontent"] : $site["footercontent"];
