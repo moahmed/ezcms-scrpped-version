@@ -10,6 +10,7 @@
 -- Server version: 5.5.24-log
 -- PHP Version: 5.4.3
 
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -18,8 +19,14 @@ SET time_zone = "+00:00";
 --
 
 
+
 -- Memory table for cache 
 -- Inno DB engine
+
+
+create database ezsite_db;  
+use ezsite_db;
+
 
 -- --------------------------------------------------------
 
@@ -28,34 +35,36 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(16) NOT NULL AUTO_INCREMENT COMMENT 'id of page',
-  `pagename` text COMMENT 'name of page',
-  `title` text COMMENT 'title of page',
-  `keywords` text COMMENT 'keywords for page',
-  `description` text COMMENT 'decription of page',
-  `maincontent` text COMMENT 'main content of page',
-  `useheader` tinyint(1) DEFAULT NULL COMMENT 'true to use header else defaults',
-  `headercontent` text COMMENT 'header content of page',
-  `usefooter` tinyint(1) DEFAULT NULL COMMENT 'true to use footer else defaults',
-  `footercontent` text COMMENT 'footer content of page',
-  `useside` tinyint(1) DEFAULT NULL COMMENT 'true to use side bar else defaults',
-  `sidecontent` text COMMENT 'side content of page',
-  `published` tinyint(1) DEFAULT NULL COMMENT 'true if pulished on site',
-  `showinmenu` tinyint(1) DEFAULT NULL COMMENT 'true if displayed as menu item',
-  `parentid` int(16) DEFAULT NULL COMMENT 'id of parent page',
-  `isredirected` tinyint(1) DEFAULT '0' COMMENT 'true if page is to be redirected',
-  `redirect` text NOT NULL COMMENT 'If specified this page will redirect',
-  `place` int(8) NOT NULL DEFAULT '0' COMMENT 'position of the page',
-  `url` text COMMENT 'the seo friendly url',
-  `sidercontent` text COMMENT 'right side-bar content',
-  `showinsubmenu` tinyint(1) DEFAULT '0' COMMENT 'show in sub menu',
-  `usesider` tinyint(1) DEFAULT '0' COMMENT 'append keyword',
-  `head` text NOT NULL COMMENT 'contents of custom head',
-  `cont` text NOT NULL COMMENT 'contents of custom controller',
-  `layout` text COMMENT 'name of the layout file to use with this page',
-  PRIMARY KEY (`id`),
-  KEY `published` (`published`),
-  FULLTEXT KEY `url` (`url`)
+   `id`            int(16)     NOT NULL    AUTO_INCREMENT COMMENT 'id of page',
+   `pagename`      text                                   COMMENT        'name       of             page',
+   `title`         text                                   COMMENT        'title      of             page',
+   `keywords`      text                                   COMMENT        'keywords   for            page',
+   `description`   text                                   COMMENT        'decription of             page',
+   `maincontent`   text                                   COMMENT        'main       content        of page',
+   `useheader`     tinyint(1)  DEFAULT        NULL        COMMENT        'true to use header else defaults',
+   `headercontent` text                                   COMMENT        'header content of page',
+   `usefooter`     tinyint(1)  DEFAULT        NULL        COMMENT        'true to use footer else defaults',
+   `footercontent` text                                   COMMENT        'footer content of page',
+   `useside`       tinyint(1)  DEFAULT        NULL        COMMENT        'true to use side bar else defaults',
+   `sidecontent`   text                                   COMMENT        'side content of page',
+   `published`     tinyint(1)  DEFAULT        NULL        COMMENT        'true if pulished on site',
+   `showinmenu`    tinyint(1)  DEFAULT        NULL        COMMENT        'true if displayed as menu item',
+   `parentid`      int(16)     DEFAULT        NULL        COMMENT        'id of parent page',
+   `isredirected`  tinyint(1)  DEFAULT        '0'         COMMENT        'true if page is to be redirected',
+   `redirect`      text        NOT NULL                   COMMENT        'If specified this page will redirect',
+   `place`         int(8)      NOT NULL       DEFAULT '0' COMMENT 'position of the page',
+   `url`           text                                   COMMENT        'the seo friendly url',
+   `sidercontent`  text                                   COMMENT        'right side-bar content',
+   `showinsubmenu` tinyint(1)  DEFAULT        '0'         COMMENT        'show in sub menu',
+   `usesider`      tinyint(1)  DEFAULT        '0'         COMMENT        'append keyword',
+   `head`          text        NOT            NULL        COMMENT        'contents of custom head',
+   `cont`          text        NOT            NULL        COMMENT        'contents of custom controller',
+   `layout`        text                                   COMMENT        'name of the layout file to use with this page',
+-- `time_sql`      TIMESTAMP   DEFAULT        NOW()       COMMENT        'page versioning by datetime',
+-- `reason`        text        DEFAULT        'none'      COMMENT        'reason for editing the page',
+   PRIMARY         KEY         (`id`),
+   KEY             `published` (`published`)
+   FULLTEXT        KEY         `url`          (`url`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='the dynamic web pages in the site';
 
 --
@@ -77,18 +86,18 @@ INSERT INTO `pages` (`id`, `pagename`, `title`, `keywords`, `description`, `main
 --
 
 CREATE TABLE IF NOT EXISTS `site` (
-  `id` int(8) NOT NULL AUTO_INCREMENT COMMENT 'id of site settings',
-  `title` text NOT NULL COMMENT 'title of the site',
-  `keywords` text NOT NULL COMMENT 'default keywords',
-  `description` text NOT NULL COMMENT 'default description',
-  `headercontent` text COMMENT 'default header content ',
-  `footercontent` text COMMENT 'default footer content',
-  `sidecontent` text COMMENT 'default side bar content',
-  `sidercontent` text COMMENT 'right side-bar content',
-  `appendtitle` tinyint(1) DEFAULT '0' COMMENT 'append title',
-  `appendkey` tinyint(1) DEFAULT '0' COMMENT 'append keyword',
-  `appenddesc` tinyint(1) DEFAULT '0' COMMENT 'append desc',
-  PRIMARY KEY (`id`)
+   `id`            int(8)     NOT     NULL     AUTO_INCREMENT COMMENT 'id of site settings',
+   `title`         text       NOT     NULL     COMMENT 'title of the site',
+   `keywords`      text       NOT     NULL     COMMENT 'default keywords',
+   `description`   text       NOT     NULL     COMMENT 'default description',
+   `headercontent` text                        COMMENT 'default header content ',
+   `footercontent` text                        COMMENT 'default footer content',
+   `sidecontent`   text                        COMMENT 'default side bar content',
+   `sidercontent`  text                        COMMENT 'right   side-bar content',
+   `appendtitle`   tinyint(1) DEFAULT '0'      COMMENT 'append title',
+   `appendkey`     tinyint(1) DEFAULT '0'      COMMENT 'append keyword',
+   `appenddesc`    tinyint(1) DEFAULT '0'      COMMENT 'append desc',
+   PRIMARY         KEY        (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COMMENT='the default settings used in the site';
 
 --
@@ -105,22 +114,22 @@ INSERT INTO `site` (`id`, `title`, `keywords`, `description`, `headercontent`, `
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(8) NOT NULL AUTO_INCREMENT COMMENT 'id of user',
-  `username` text NOT NULL COMMENT 'name of user',
-  `email` text NOT NULL COMMENT 'email address of user',
-  `passwd` text NOT NULL COMMENT 'password for the user',
-  `active` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'able to login',
-  `editpage` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit page',
-  `delpage` tinyint(1) NOT NULL DEFAULT '0',
-  `viewstats` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'can view site statistics',
-  `edituser` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'can administer other users',
-  `deluser` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'delete users',
-  `editsettings` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit settings',
-  `editcont` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit controller',
-  `editlayout` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit layout',
-  `editcss` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit css',
-  `editjs` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'edit js',
-  PRIMARY KEY (`id`)
+   `id`           int(8)     NOT    NULL AUTO_INCREMENT COMMENT 'id of user',
+   `username`     text       NOT    NULL COMMENT        'name of user',
+   `email`        text       NOT    NULL COMMENT        'email address of user',
+   `passwd`       text       NOT    NULL COMMENT        'password for the user',
+   `active`       tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'able to login',
+   `editpage`     tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit page',
+   `delpage`      tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'deleted page',
+   `viewstats`    tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'can view site statistics',
+   `edituser`     tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'can administer other users',
+   `deluser`      tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'delete users',
+   `editsettings` tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit settings',
+   `editcont`     tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit controller',
+   `editlayout`   tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit layout',
+   `editcss`      tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit css',
+   `editjs`       tinyint(1) NOT    NULL DEFAULT        '0' COMMENT 'edit js',
+   PRIMARY        KEY        (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='the users of this site';
 
 --

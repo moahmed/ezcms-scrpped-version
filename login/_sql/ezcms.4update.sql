@@ -21,7 +21,92 @@ SET time_zone = "+00:00";
 -- Memory table for cache 
 -- Inno DB engine
 
+new tables
+log
+cache
+
+
 -- --------------------------------------------------------
+
+DROP TABLE 	`phptraffica_conf`, 
+			`phptraffica_conf_ipban`, 
+			`phptraffica_conf_sites`, 
+			`traffic__acces`, 
+			`traffic__browser`, 
+			`traffic__country`, 
+			`traffic__day`, 
+			`traffic__host`, 
+			`traffic__hour`, 
+			`traffic__iplist`, 
+			`traffic__keyword`, 
+			`traffic__os`, 
+			`traffic__pages`, 
+			`traffic__path`, 
+			`traffic__referrer`, 
+			`traffic__resolution`, 
+			`traffic__retention`, 
+			`traffic__uniq`;
+
+ALTER TABLE `pages` DROP INDEX `url`;
+ALTER TABLE `pages` ENGINE = InnoDB ;
+ALTER TABLE `site` ENGINE = InnoDB ;
+
+
+
+ALTER TABLE `pages`
+  DROP `showinmenu`,
+  DROP `isredirected`,
+  DROP `redirect`,
+  DROP `cont`;
+
+ALTER TABLE `pages` CHANGE `url` `url` VARCHAR( 4000 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'the seo friendly url'
+ALTER TABLE `pages` CHANGE `layout` `layout` VARCHAR( 2000 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT 'name of the layout file to use with this page'
+			
+ALTER TABLE `users`
+  DROP `viewstats`;
+  
+ALTER TABLE `site` 
+	DROP `title` ,
+	DROP `keywords` ,
+	DROP `description` ,
+	DROP `appendtitle` ,
+	DROP `appendkey` ,
+	DROP `appenddesc` ;
+
+
+
+
+CREATE TABLE `site_cache` (
+  `headercontent` text COMMENT 'default header content ',
+  `footercontent` text COMMENT 'default footer content',
+  `sidecontent` text COMMENT 'default side bar content',
+  `sidercontent` text COMMENT 'right side-bar content'
+) ENGINE=Memory  DEFAULT CHARSET=latin1 COMMENT='cached site defaults';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 --
 -- Table structure for table `pages`

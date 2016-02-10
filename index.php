@@ -103,8 +103,9 @@ $header      = ($page["useheader"] == 1) ? $page["header"]        : $site["heade
 $sidebar     = ($page["useside"]   == 1) ? $page["sidecontent"]   : $site["sidecontent"];
 $siderbar    = ($page["usesider"]  == 1) ? $page["sidercontent"]  : $site["sidercontent"];
 $footer      = ($page["usefooter"] == 1) ? $page["footercontent"] : $site["footercontent"];
-// you can add your own variable here, eg: $google_analysics_code = '';
+// you can add your own variable here, eg: $mymodscrp = '';
 // This variable are avaiable in layout files for use.
+
 
 // Set 404 header when servering page not found
 if ($page['url']=='/Page-Not-Found.html') {

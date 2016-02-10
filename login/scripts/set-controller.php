@@ -7,15 +7,15 @@
  * HMI Technologies Mumbai (2013-14)
  *
  * Script: Save the controller (index.php) for the site.
- * 
+ *
  */
 require_once("init.php");
-if (!isset($_POST["Submit"])) die('xx'); 
+if (!isset($_POST["Submit"])) die('xx');
 if (!$_SESSION['editcontroller']) {header("Location: ../controllers.php?flg=noperms");exit;}	// permission denied
 if (isset($_POST["txtContents"])) $contents = stripslashes($_POST["txtContents"]); else die('xxx');
 $filename = '../../index.php';
 if (is_writable($filename)) {
-	if (fwrite(fopen($filename, "w+"),$contents)) 
+	if (fwrite(fopen($filename, "w+"),$contents))
 		header("Location: ../controllers.php?flg=green");
 	else header("Location: ../controllers.php?flg=red");
 } else header("Location: ../controllers.php?flg=pink");

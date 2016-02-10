@@ -11,7 +11,7 @@
  */
 require_once("init.php");
 if (!$_SESSION['editjs']) {header("Location: ../scripts.php?flg=noperms");exit;}	// permission denied
-if (!isset($_POST["Submit"])) die('xx'); 
+if (!isset($_POST["Submit"])) die('xx');
 if (isset($_POST["txtContents"])) $contents = ($_POST["txtContents"]); else die('xxx');
 if (isset($_POST["txtName"])) $filename = $_POST["txtName"]; else die('xxxx');
 
@@ -23,14 +23,14 @@ if ($filename=='../main.js') $retfile = '';
 
 // check if the file exists
 if (!file_exists("../$filename")) {
-	if (file_put_contents("../$filename",$contents)) 
+	if (file_put_contents("../$filename",$contents))
 		header("Location: ../scripts.php?flg=green&show=$retfile");
 	else header("Location: ../scripts.php?flg=red&show=$retfile");
 	exit;
 }
 
 if (is_writable("../$filename")) {
-	if (fwrite(fopen("../$filename", "w+"),$contents)) 
+	if (fwrite(fopen("../$filename", "w+"),$contents))
 		header("Location: ../scripts.php?flg=green$retfile");
 	else header("Location: ../scripts.php?flg=red$retfile");
 } else header("Location: ../scripts.php?flg=pink$retfile");
