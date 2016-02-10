@@ -1,23 +1,42 @@
 <?php
-// Update the information below 
+/*
+ * Code written by mo.ahmed@hmi-tech.net
+ *
+ * Version 4.0.0 Dated 06-Fec-2016
+ * HMI Technologies Mumbai (2015-16)
+ *
+ * Include: ezCMS Configuration File - config.php
+ * Provides database connection class for ezCMS
+ */
+class db extends PDO {
+	
+	public function __construct() {
+	
+		/**  MySQL database name */
+		$DB_NAME = 'ezSite_db';
+		
+		/** MySQL database username */
+		$DB_USER = 'root');
+		
+		/** MySQL database password */
+		$DB_PASSWORD = '');
+		
+		/** MySQL hostname */
+		$DB_HOST = 'localhost');		
+		
+		try {
+		
+			/** MySQL Connect */
+			parent::__construct("mysql:host=$DB_HOST;dbname=$DB_NAME", $DB_USER, $DB_PASS );
+						
+		} catch (PDOException $e) { 
+		
+			/** MySQL Connection error message */ 
+			header('HTTP/1.0 500 Internal Server Error');
+			die("<h1>Site down for maintenance.</h1><p>Please visit us later !</p>");
+			
+		}
 
-	// Database Connection Setting
-	$databaseServer = 'localhost';
-	$databaseUser   = 'root';
-	$databasePasswd = '';	
-	$databaseName   = 'ezSite_db';
+	}
 	
-	
-// Do not edit the code below as it is common to the CMS
-	// Expire the headers
-	header ("Expires: Thu, 17 May 2011 10:17:17 GMT");    			// Date in the past
-	header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
-	header ("Cache-Control: no-cache, must-revalidate");  			// HTTP/1.1
-	header ("Pragma: no-cache");  	                                // HTTP/1.0	
-	// connect to the database	
-	@mysql_connect  ($databaseServer,$databaseUser,$databasePasswd) 
-		or die("<h1>Site down for maintenance.</h1><p>Please visit us later !</p>");
-	@mysql_select_db($databaseName)
-		or die("<h1>Site down for maintenance.</h1><p>Please visit us later !</p>");
-  
-?>
+} ?>
