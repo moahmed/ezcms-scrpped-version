@@ -9,13 +9,15 @@
  * Include: Displays the footer
  * 
  */
-$sql = 'SELECT (SELECT Count(*) from pages where `published`=1) as pubCNT, (SELECT Count(*) from pages where `published`=0) as unCNT';
-$rs = mysql_query($sql) or die("Unable to Details for Web Page");
-$row      = mysql_fetch_array($rs);
-$pubCNT   = $row['pubCNT'];
-$unpubCNT = $row['unCNT'];
-$totCNT   = $pubCNT+$unpubCNT;
-mysql_free_result($rs);
+
+// Fetch the site stats
+$stats = $dbh->query('SELECT 
+	(SELECT Count(0) from `pages` where `published`=1) as ispublished, 
+	(SELECT Count(0) from `pages` where `published`=0) as unpublished')->fetch(PDO::FETCH_ASSOC);
+	
+// Get the total pages
+$totalPages = $stats['ispublished']+$stats['unpublished'];
+
 ?>
 <div class="clearfix"></div>
 <div id="footer">
@@ -24,11 +26,11 @@ mysql_free_result($rs);
       <div class="span3"><a target="_blank" href="http://www.hmi-tech.net/">&copy; HMI Technologies</a> 
 	  </div>
       <div class="span6"> 
-	  	Published: <span class="label label-info"><?php echo $pubCNT; ?> page(s)</span> &middot; 
-		Unpublished: <span class="label"><?php echo $unpubCNT; ?> page(s)</span> &middot; 
-		Total: <span class="label label-inverse"><?php echo $totCNT; ?> pages</span> 
+	  	Published: <span class="label label-info"><?php echo $stats['ispublished']; ?> page(s)</span> &middot; 
+		Unpublished: <span class="label"><?php echo $stats['unpublished']; ?> page(s)</span> &middot; 
+		Total: <span class="label label-inverse"><?php echo $totalPages; ?> pages</span> 
 	  </div>
-      <div class="span3"> ezCMS Ver:<strong>3.141029</strong> </div>
+      <div class="span3"> ezCMS Ver:<strong>4.160210</strong> </div>
     </div>
   </div>
 </div>

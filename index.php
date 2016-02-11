@@ -61,7 +61,9 @@ if ($stmt->rowCount()) {
 	if (!$page["published"]) { 
 	
 		// Start session if not started to check ADMIN login status
-		if (session_status() !== PHP_SESSION_ACTIVE) session_start(); 
+		if (session_status() !== PHP_SESSION_ACTIVE) {
+			session_start(); 
+		}
 		
 		// Set SESSION ADMIN Login Flag to false if not set
 		if (!isset($_SESSION['LOGGEDIN'])) {

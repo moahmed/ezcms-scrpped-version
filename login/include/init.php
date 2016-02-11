@@ -11,6 +11,9 @@
  */
 session_start();
 if (!isset($_SESSION['LOGGEDIN'])) $_SESSION['LOGGEDIN'] = false;
-if ($_SESSION['LOGGEDIN'] == false) { header("Location: index.php?flg=expired"); exit; }
+if ($_SESSION['LOGGEDIN'] == false) { 
+	header("Location: index.php?flg=expired"); exit; 
+}
 include('../config.php');
+$dbh = new db; // database handle
 ?>

@@ -9,38 +9,70 @@
  * View: Login page to ezCMS (index.php)
  * 
  */
-session_start();
-include('../config.php');
-if (!isset($_SESSION['LOGGEDIN'])) $_SESSION['LOGGEDIN'] = false;
-if ($_SESSION['LOGGEDIN'] == true) { header("Location: pages.php"); exit; }
-$userid = "";
-if (isset($_GET["userid"])) $userid = $_GET["userid"]; 
-if ($userid == '') { if (isset($_SESSION['userid'])) $userid = $_SESSION['userid']; }
-$flg = "";
-if (isset($_GET["flg"])) $flg = $_GET["flg"];
+ 
+// Start SESSION if not started 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+	session_start(); 
+}
+
+// Set SESSION ADMIN Login Flag to false if not set
+if (!isset($_SESSION['LOGGEDIN'])) {
+	$_SESSION['LOGGEDIN'] = false;
+}
+
+// Redirect the user if already logged in
+if ($_SESSION['LOGGEDIN'] == true) { 
+	header("Location: pages.php"); 
+	exit; 
+}		
+		
+// **************** DATABASE ****************
+require_once ("../config.php"); // PDO Class for database access
+$dbh = new db; // database handle available in layouts
+
+// Check if userid is set in the request
+$userid = ""; // Reset Login
+if (isset($_GET["userid"])) {
+	$userid = $_GET["userid"]; 
+}
+
+// If userid is not set check session for it.
+if ( ($userid == '') && (isset($_SESSION['userid'])) ) { 
+	$userid = $_SESSION['userid']; 
+}
+
+
+// Check if Messahe Flag is set
+$flg = ""; // Set the error message flag to none
+if (isset($_GET["flg"])) { 
+	$flg = $_GET["flg"];
+}
+
+// Set the HTML to display for this flag
 switch ($flg) {
 	case "failed":
-		$msg = '<span class="label label-important" style="display:block; margin-bottom:10px;">
-					Incorrect email or password</span>';
-		break;		
+		$msg = '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>
+					<strong>Login Failed !</strong><br>Incorrect email or password</div>';
+		break;
 	case "expired":
-		$msg = '<span class="label label-warning" style="display:block; margin-bottom:10px;">
-					Your Session has Expired</span>';
+		$msg = '<div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert">x</button>
+					<strong>Session Expired !</strong><br>Your session has expired</div>';	
 		break;
 	case "logout":
-		$msg = '<span class="label label-success" style="display:block; margin-bottom:10px;">
-					You have successfully  Logged out</span>';
+		$msg = '<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">x</button>
+					<strong>Logged Out !</strong><br>You have successfully logged out</div>';	
 		break;
-		case "inactive":
-		$msg = '<span class="label label-important" style="display:block; margin-bottom:10px;">
-					Your Status is In Active</span>';
-		break;		
+	case "inactive":
+		$msg = '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">x</button>
+					<strong>Account Inactive !</strong><br>Your status is NOT Active.</div>';	
+		break;
 	default:
 		$msg = '';
+		
 } 
 ?><!DOCTYPE html><html lang="en"><head>
 
-	<title>Login &middot; ezCMS Admin</title>
+	<title>Login :: ezCMS Admin</title>
 	<?php include('include/head.php'); ?>
 	<style type="text/css">    
 		.form-signin {
@@ -64,23 +96,20 @@ switch ($flg) {
 				padding: 10px 20px 20px;
 				margin: 10px auto 10px;}      
 		}
-			
 	</style>
 	
 </head><body>
   
 	<div id="wrap">
-		
 		<div class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="navbar-inner">
 			  <a class="brand" href="/">ezCMS &middot; <?php echo $_SERVER['HTTP_HOST']; ?></a>
-			  <div class="pull-right" style="color: #FFFFFF;margin: 10px 10px 2px 2px;">Your ip <strong><?php echo $_SERVER['REMOTE_ADDR']; ?></strong> is logged for security</div>
+			  <div class="pull-right" style="color: #FFFFFF;margin: 10px 10px 2px 2px;">Your ip <strong>
+				<?php echo $_SERVER['REMOTE_ADDR']; ?></strong> is logged for security</div>
 			  <div class="clearfix"></div>
 		  </div>
-		</div>		
-		  
+		</div>
 		<div class="container">
-			
 			<form id="frm-login" class="form-signin" method="post" action="scripts/login.php">
 				<img src="../site-assets/HMI-logo.png" >
 				<h2 class="form-signin-heading">Please sign in</h2>
@@ -111,10 +140,9 @@ switch ($flg) {
 						title="Are you lost? Go back to the main site."><< Back to Site</a>
 				</p>
 				<p class="clearfix"></p>
-			</form>	
-			
+			</form>
 		</div> 
 	</div>
-	
 <?php include('include/footer.php'); ?>
+
 </body></html>
