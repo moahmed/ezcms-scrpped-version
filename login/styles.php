@@ -73,9 +73,9 @@ if ($flg=="noperms")
 				  <form id="frm" action="scripts/set-styles.php" method="post" enctype="multipart/form-data">
 					<div class="navbar">
 						<div class="navbar-inner">
-							<input type="submit" name="Submit" id="Submit" value="Save Changes" class="btn btn-primary" style="padding:5px 12px;">
+							<input type="submit" name="Submit" id="Submit" value="Save Changes" class="btn btn-inverse" style="padding:5px 12px;">
 							<div class="btn-group">
-							  <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">
+							  <a class="btn dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
 								Save As <span class="caret"></span></a>
 
 							  <div id="SaveAsDDM" class="dropdown-menu" style="padding:10px;">

@@ -21,7 +21,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-*/
+
+
 session_start();
 if (!isset($_SESSION['SESSION' ])) 
 	$_SESSION['SESSION' ] = true;
@@ -40,7 +41,7 @@ if (!$_SESSION['editpage']) {
 	<p><img src="../../../img/noaccess.png" width="128" height="128"></p>
 	<h3 style="font-family: Tahoma;">Please emails <a href="mailto:support@hmi-tech.net">support@hmi-tech.net</a> for support.</h3></div>';
 	exit; }		
-	
+*/	
     include_once dirname(__FILE__) . '/php/init.php';
     $PGRUploaderExtension = "";
     if (PGRFileManagerConfig::$allowedExtensions == "") $PGRUploaderExtension = "*.*";

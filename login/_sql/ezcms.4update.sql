@@ -74,14 +74,17 @@ ALTER TABLE `site`
 	DROP `appenddesc` ;
 
 
+UPDATE `users` SET `passwd` = SHA2 (`passwd`, 512);
+
+ALTER TABLE `users` CHANGE `passwd` `passwd` VARCHAR( 512 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'password has for the user'
+ALTER TABLE `users` CHANGE `email` `email` VARCHAR( 1024 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'email address of user'
+ALTER TABLE `users` ADD INDEX ( `email` , `passwd` ) ;
+ALTER TABLE `users` CHANGE `username` `username` VARCHAR( 1024 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT 'name of user'
+
+ALTER TABLE `users` ADD `editor` TINYINT( 1 ) NOT NULL DEFAULT '0' COMMENT 'Editor to use in the cms',
+ADD `createdon` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'created on';
 
 
-CREATE TABLE `site_cache` (
-  `headercontent` text COMMENT 'default header content ',
-  `footercontent` text COMMENT 'default footer content',
-  `sidecontent` text COMMENT 'default side bar content',
-  `sidercontent` text COMMENT 'right side-bar content'
-) ENGINE=Memory  DEFAULT CHARSET=latin1 COMMENT='cached site defaults';
 
 
 

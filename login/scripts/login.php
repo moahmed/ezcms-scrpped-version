@@ -6,74 +6,70 @@
  * Rev: 14-Apr-2014 (2.140413)
  * HMI Technologies Mumbai (2013-14)
  *
- * script: logs in the user to the site
+ * script: logs in the user to the cms
  *
  */
 
-session_start();
-if (!isset($_SESSION['SESSION' ])) $_SESSION['SESSION' ] = true;
-if (!isset($_SESSION['LOGGEDIN'])) $_SESSION['LOGGEDIN'] = false;
-include('../../config.php');
-
-// reset session variables...
-$_SESSION['USERID'] = "";
-$_SESSION['LOGGEDIN'] = false;
-$_SESSION['EMAIL'] = "";
-
-// initialize variables...
-$userid = "";
-$passwd = "";
-$email = "";
-
-// make sure post parameters were sent...
-if (isset($_POST["userid"])) $userid = addslashes($_POST["userid"]);
-if (isset($_POST["passwd"])) $passwd = addslashes($_POST["passwd"]);
-
-// form variables must have something in them...
-if ($userid == "" || $passwd == "" ) { header("Location: ../?flg=failed&userid=".$userid); exit; }
-
-// check in database...
-$query = "SELECT * FROM users WHERE email = '".$userid."';";
-
-$result = mysql_query($query) or die("Invalid query: " . mysql_error());
-
-// if userid is not present in DB go back to login page...
-if (mysql_affected_rows() != 1) { header("Location: ../?flg=failed&userid=".$userid); exit; }
-
-if ($row = mysql_fetch_assoc($result)) {
-
-	if (strcmp($row['passwd'], ($passwd)) != 0) { header("Location: ../?flg=failed&userid=".$userid); exit; }
-
-	if (!$row['active']) { header("Location: ../?flg=inactive&userid=".$userid); exit; }
-
-	// set user details and user rights ka session variables...
-	$_SESSION['USERID'] = $row['id'];
-	$_SESSION['EMAIL'] = $row['email'];
-	$_SESSION['LOGINNAME'] = $row['username'];
-	$_SESSION['viewstats'] = $row['viewstats'];
-	$_SESSION['edituser'] = $row['edituser'];
-	$_SESSION['deluser'] = $row['deluser'];
-	$_SESSION['editpage'] = $row['editpage'];
-	$_SESSION['delpage'] = $row['delpage'];
-	$_SESSION['editsettings'] = $row['editsettings'];
-	$_SESSION['editcontroller'] = $row['editcont'];
-	$_SESSION['editlayout'] = $row['editlayout'];
-	$_SESSION['editcss'] = $row['editcss'];
-	$_SESSION['editjs'] = $row['editjs'];
-
-	// Check editor and use it
-  // default editor is NOT ckeditor - 2016-Jan-27 Wed 21:41 Mohsin.
-	$_SESSION['EDITORTYPE']=1;
-	if (isset($_POST['sleditorstyle'])) {
-		if ($_POST['sleditorstyle'] == '0')$_SESSION['EDITORTYPE']=0;
-		if ($_POST['sleditorstyle'] == '1')$_SESSION['EDITORTYPE']=1;
-		if ($_POST['sleditorstyle'] == '2')$_SESSION['EDITORTYPE']=2;
-	}
-
-	// update the last login date time stamp.
-	$_SESSION['LOGGEDIN']  = true;
-	header("Location: ../pages.php");
+// Start SESSION if not started 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+	session_start(); 
 }
+
+// Set SESSION ADMIN Login Flag to false if not set
+if (!isset($_SESSION['LOGGEDIN'])) {
+	$_SESSION['LOGGEDIN'] = false;
+}
+
+// Make sure post parameters were sent...
+if ( (!isset($_POST["userid"])) || (!isset($_POST["passwd"])) ) {
+	header('HTTP/1.1 400 BAD REQUEST');
+	die('Invalid Request');
+}
+
+// Get the POST data
+$userid = $_POST["userid"];
+$passwd = $_POST["passwd"];
+
+// Form variables must have something in them...
+if ( (empty($userid)) || (empty($passwd)) ) { 
+	header("Location: ../?flg=failed&userid=$userid"); 
+	exit; 
+}
+
+// **************** DATABASE ****************
+require_once ("../../config.php"); // PDO Class for database access
+$dbh = new db; // database handle
+
+// Prepare SQL to fetch user's record from dataabse
+$stmt = $dbh->prepare('SELECT * FROM `users` WHERE `email` = ? AND `passwd` = SHA2( ? , 512 ) LIMIT 1');
+$stmt->execute( array($userid, $passwd) );
+
+// Check if User Record is present and returned from the database
+if ($stmt->rowCount()) { 
+
+	// Fetch the user record from database
+	$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	// User must be ACTIVE to login
+	if (!$user['active']) { 
+		header("Location: ../?flg=inactive&userid=$userid"); 
+		exit; 
+	}
+	
+	//login the user
+	$_SESSION['LOGGEDIN']   = true;  // login flag to TRUE
+	$_SESSION['USERID']     = $user['id']; // User's ID
+	$_SESSION['LOGINNAME']  = $user['username']; // User's Name
+	$_SESSION['EDITORTYPE'] = $user['editor']; // Check editor and use it	
+	
+	// Redirect to logged in page
+	header("Location: ../pages.php");	
+	exit;
+	
+}
+
+// Login failed
 header("Location: ../?flg=failed&userid=".$userid);
 exit;
+
 ?>

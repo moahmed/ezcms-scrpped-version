@@ -20,12 +20,13 @@ function validateName($input) {
 function getTreeHTML($id, $pageid , $parentid, $url) {
 	static $ddOptions = '';
 	static $nestCount;
-	 
+	 return '';
 	$sql = 'select `id` , `title` , `url`, `published`, `description` from  `pages` where `parentid` = ' . $id . ' order by place;';		
     $rs = mysql_query($sql) or die("Unable to Execute  Select query");
     $recordcount = mysql_num_rows($rs);
     
     if ($recordcount) {	 
+		
 		$nestCount += 1;
 		if ($nestCount == 1) echo '<ul id="left-tree">'; else echo '<ul>';
 	    $cnt = 0;

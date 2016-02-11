@@ -164,76 +164,9 @@ if (isset($_REQUEST['Submit'])) {
 	}
 } else if ($id <> 'new')  {
 
-	$qry = "SELECT * FROM `pages` WHERE `id` = " . $id;
-	$rs = mysql_query($qry);
+	//$qry = "SELECT * FROM `pages` WHERE `id` = " . $id;
+	//$rs = mysql_query($qry);
 
-	if (!mysql_num_rows($rs))
-		header("Location: pages.php?show=&flg=yell");
-
-	$arr = mysql_fetch_array($rs);
-	mysql_free_result($rs);
-	$title       	= $arr["title"     ];
-	$name      	 	= $arr["pagename"  ];
-	$url      	 	= $arr["url"       ];
-	if ((!isset($url)) or ($url == "" ) or (empty($url))) $url="/";
-	$keywords    	= htmlspecialchars($arr["keywords"     ]);
-	$description 	= htmlspecialchars($arr["description"  ]);
-	$maincontent 	= htmlspecialchars($arr["maincontent"  ]);
-	$header      	= htmlspecialchars($arr["headercontent" ]);
-	$sidebar     	= htmlspecialchars($arr["sidecontent"   ]);
-	$siderbar    	= htmlspecialchars($arr["sidercontent"  ]);
-	$footer			= htmlspecialchars($arr["footercontent" ]);
-	$head			= htmlspecialchars($arr["head" ]);
-	$cont			= '';
-	$redirect 		= $arr["redirect"];
-	$parentid 		= $arr["parentid"];
-	$slLayout		= $arr["layout"];
-	$usefooter      = '';
-	$useheader      = '';
-	$useside        = '';
-	$usesider       = '';
-	$published    =  '';
-	if ($arr["published"   ] == 1) $published    = "checked";
-	if ($arr["showinmenu"  ] == 1) $showinmenu   = "checked";
-	if ($arr["showinsubmenu"] == 1) $showinsmenu = "checked";
-	if ($arr["isredirected"] == 1) $isredirected = "checked";
-	if ($arr["useheader"   ] == 1) $useheader    = "checked";
-	if ($arr["usefooter"   ] == 1) $usefooter    = "checked";
-	if ($arr["useside"     ] == 1) $useside      = "checked";
-	if ($arr["usesider"    ] == 1) $usesider     = "checked";
-
-	// find url in traffic_pages
-	if ($url=='/') $turl = '/index.php'; else $turl = $url;
-	$rs = mysql_query("SELECT `id` FROM `traffic__pages` WHERE `name` = '$turl' LIMIT 1");
-  if ($rs) {
-    if (mysql_num_rows($rs)) {
-      $arr = mysql_fetch_array($rs);
-      $tid = $arr['id'];
-      $PageTrackingLinks =
-        '<li class="nav-header">Page Visitor Tracking</li><li class="dropdown-submenu">
-          <a tabindex="-1" href="#">Visitor Tracking</a><ul class="dropdown-menu">
-            <li><a class="lframe" target="_blank" title="Page Visitor Tracking Summary"
-            href="traffic/index.php?mode=stats&sid=39547&show=page&pageid='.$tid.'&lang=en">
-            <i class="icon-chevron-right"></i> Summary</a></li>
-            <li><a class="lframe" target="_blank" title="Page Keyword Tracking"
-            href="traffic/index.php?mode=stats&sid=39547&show=key&pageid='.$tid.'&lang=en">
-            <i class="icon-chevron-right"></i> Keywords</a>
-            <li><a class="lframe" target="_blank" title="Page Referrer Tracking"
-            href="traffic/index.php?mode=stats&sid=39547&show=ref&start=1&sort=hits&pageid='.$tid.'&lang=en">
-            <i class="icon-chevron-right"></i> Referrers</a></li>
-            <li><a class="lframe" target="_blank" title="Page Visitor Path Analysis"
-            href="traffic/index.php?mode=stats&sid=39547&show=pathdesign&pathid='.$tid.'&lang=en">
-            <i class="icon-chevron-right"></i> Visitor Path</a>
-            <li><a class="lframe" target="_blank" title="Page Visitor Flow Analysis"
-            href="traffic/index.php?mode=stats&sid=39547&show=studypath&pathid='.$tid.'&lang=en">
-            <i class="icon-chevron-right"></i> Visitor Flow</a></li></ul></li>';
-    } else {
-      $PageTrackingLinks =
-        '<li class="nav-header">no visitor tracking data yet,<br>'.
-        'check after visiting the page.<br>also make sure tracking is enabled.</li>';
-    }
-    mysql_free_result($rs);
-  }
 } else {
 	if (!$_SESSION['editpage']) {header("Location: pages.php?flg=noperms");exit;}	// permission denied
 }
@@ -263,14 +196,14 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 					<form id="frmPage" action="" method="post" enctype="multipart/form-data">
 					<div class="navbar">
 						<div class="navbar-inner">
-							<input type="submit" name="Submit" class="btn btn-primary"
+							<input type="submit" name="Submit" class="btn btn-inverse"
 								value="<?php if ($id == 'new') echo 'Add Page'; else echo 'Save Changes';?>">
 							  <?php if ($id != 'new') { ?>
 								<a href="<?php echo $url; ?>" target="_blank"
 									<?php if ($published!='checked') echo 'onclick="return confirm(\'The page is Not published, its only visible to you.\');"'; ?>
-									class="btn btn-success">View</a>
-								<a href="pages.php?id=new" class="btn btn-info">New</a>
-								<a href="scripts/copy-page.php?copyid=<?php echo $id; ?>" class="btn btn-warning">Copy</a>
+									class="btn btn-inverse">View</a>
+								<a href="pages.php?id=new" class="btn btn-inverse">New</a>
+								<a href="scripts/copy-page.php?copyid=<?php echo $id; ?>" class="btn btn-inverse">Copy</a>
 								<?php if ($id != 1 && $id != 2) echo '<a href="scripts/del-page.php?delid='.$id.
 										'" onclick="return confirm(\'Confirm Delete ?\');" class="btn btn-danger">Delete</a>'; ?>
 								<div class="btn-group">
@@ -297,8 +230,6 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 									  	"http://www.webconfs.com/keyword-density-checker.php?url=http%3A%2F%2F<?php
 										echo $_SERVER['HTTP_HOST'] . $url; ?>">
 										<i class="icon-chevron-right"></i> Keyword Density</a></li>
-									  <li class="divider"></li>
-									  <?php echo $PageTrackingLinks; ?>
 									</ul>
 								</div>
 							  <?php } ?>

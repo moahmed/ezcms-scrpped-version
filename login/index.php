@@ -28,7 +28,7 @@ if ($_SESSION['LOGGEDIN'] == true) {
 		
 // **************** DATABASE ****************
 require_once ("../config.php"); // PDO Class for database access
-$dbh = new db; // database handle available in layouts
+$dbh = new db; // database handle
 
 // Check if userid is set in the request
 $userid = ""; // Reset Login
@@ -40,7 +40,6 @@ if (isset($_GET["userid"])) {
 if ( ($userid == '') && (isset($_SESSION['userid'])) ) { 
 	$userid = $_SESSION['userid']; 
 }
-
 
 // Check if Messahe Flag is set
 $flg = ""; // Set the error message flag to none
@@ -79,18 +78,12 @@ switch ($flg) {
 			max-width: 300px;
 			padding: 19px 29px 29px;
 			margin: 60px auto 10px;
-			background: rgba(0,0,0,0.5);
-			
-			/* border-radius: 10px; 
-			box-shadow: 1px 1px 2px rgba(0,0,0,.5);
-			border: 1px solid #999;
-			background-color: #fff;
-			*/
+			background: rgba(0,0,0,0.75);
 		}
 		.form-signin .form-signin-heading{
 			margin-bottom: 10px; 
 			text-align:center; 
-			text-shadow: 2px 2px 3px rgba(150, 150, 150, 1);}
+		}
 		.form-signin input[type="text"],
 		.form-signin input[type="password"],
 		.form-signin select {
@@ -132,7 +125,7 @@ switch ($flg) {
 					data-placement="top" 
 					title="Enter your password here."					
 					placeholder="Password">				
-				<button class="btn btn-large btn-primary" type="submit">Sign in</button>
+				<button class="btn btn-large btn-inverse" type="submit">Sign in</button>
 				<p class="pull-right">
 					<a id="lnk-restpass" href="#" class="tooltipme2"
 						data-toggle="tooltip" 

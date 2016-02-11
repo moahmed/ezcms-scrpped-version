@@ -10,20 +10,17 @@
  *
  */
 require_once("include/init.php");
-$qry = "SELECT * FROM `site` WHERE `id` = 1;";
-$rs = mysql_query($qry) or die("Unable to Execute  MYSQL query");
-$arr = mysql_fetch_array($rs);
-$title       = $arr["title"         ];
-$keywords    = $arr["keywords"      ];
-$description = $arr["description"   ];
-$header      = htmlspecialchars($arr["headercontent" ]);
-$sidebar     = htmlspecialchars($arr["sidecontent"   ]);
-$siderbar    = htmlspecialchars($arr["sidercontent"  ]);
-$footer      = htmlspecialchars($arr["footercontent" ]);
-if ($arr["appendtitle"] == 1) $aptitle = "checked";	else $aptitle = '';
-if ($arr["appendkey"  ] == 1) $apkey   = "checked";	else $apkey   = '';
-if ($arr["appenddesc" ] == 1) $apdesc  = "checked";	else $apdesc  = '';
-mysql_free_result($rs);
+
+$site = $dbh->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
+		->fetch(PDO::FETCH_ASSOC); // get the site details
+$title       = '';
+$keywords    = '';
+$description = '';
+$header      = htmlspecialchars($site["headercontent" ]);
+$sidebar     = htmlspecialchars($site["sidecontent"   ]);
+$siderbar    = htmlspecialchars($site["sidercontent"  ]);
+$footer      = htmlspecialchars($site["footercontent" ]);
+
 if (isset($_GET["flg"])) $flg = $_GET["flg"]; else $flg = "";
 $msg = "";
 if ($flg=="red")
@@ -50,7 +47,7 @@ if ($flg=="noperms")
 			  <form id="frmHome" action="scripts/set-defaults.php" method="post" enctype="multipart/form-data" class="form-horizontal">
 				<div class="navbar">
 					<div class="navbar-inner">
-						<input type="submit" name="Submit" value="Save Changes" class="btn btn-primary">
+						<input type="submit" name="Submit" value="Save Changes" class="btn btn-inverse">
 					</div>
 				</div>
 				<?php echo $msg; ?>
@@ -77,14 +74,7 @@ if ($flg=="noperms")
 									value="<?php echo $title; ?>"
 									data-placement="top"
 									class="input-block-level tooltipme2"><br>
-								<input name="ckapptitle" type="checkbox" id="ckapptitle" value="checkbox" <?php echo $aptitle; ?>>
-								Append to Page Title
-								<?php if ($aptitle == "checked") echo
-										'<span class="label label-important">The page title will be appended.
-										Not Recommended, its better to have a unique title for each page.</span>';
-									else echo
-										'<span class="label label-info">The page title will be not appended.
-										Recommended, its better to have a unique title for each page.</span>';?>
+
 							</div>
 						  </div>
 
@@ -97,14 +87,7 @@ if ($flg=="noperms")
 									data-toggle="tooltip"
 									data-placement="top"
 									class="input-block-level tooltipme2"><?php echo $description; ?></textarea><br>
-								<input name="ckappdesc" type="checkbox" id="ckappdesc" value="checkbox" <?php echo $apdesc; ?>>
-								Append to Page Description
-								<?php if ($apdesc == "checked") echo
-										'<span class="label label-important">The page description will be appended.
-										Not Recommended, its better to have a unique description for each page.</span>';
-									else echo
-										'<span class="label label-info">The page description will be not appended.
-										Recommended, its better to have a unique description for each page.</span>';?>
+
 							</div>
 						  </div>
 
@@ -117,14 +100,7 @@ if ($flg=="noperms")
 									data-toggle="tooltip"
 									data-placement="top"
 									class="input-block-level tooltipme2"><?php echo $keywords; ?></textarea><br>
-								<input name="ckappkey" type="checkbox" id="ckappkey" value="checkbox" <?php echo $apkey; ?>>
-								Append to Page Keywords
-									<?php if ($apkey == "checked") echo
-											'<span class="label label-important">The page keywords will be appended.
-											Not Recommended, its better to have a unique title for each page.</span>';
-										else echo
-											'<span class="label label-info">The page keywords will be not appended.
-											Recommended, its better to have unique keywords for each page.</span>';?>
+
 							</div>
 						  </div>
 

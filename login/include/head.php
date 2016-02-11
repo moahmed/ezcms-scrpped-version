@@ -17,7 +17,8 @@
 <link type="image/x-icon" href="favicon.ico" rel="icon"/>
 <link type="image/x-icon" href="favicon.ico" rel="shortcut icon"/>
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="js/jquery.treeview/jquery.treeview.css" rel="stylesheet">
 <style type="text/css"> 
 	html,body {height: 100%;}
 	body {
@@ -42,14 +43,26 @@
 	.tooltip-inner {font-size:18px;}
 	.label, .badge {white-space:normal;}
 	div.white-boxed {
-		background: #fff;
-		border: 1px solid #036;
+		background: rgba(0,0,0,0.75);
 		padding: 10px;
-		margin-bottom:10px;
-		-webkit-box-shadow: 0 7px 4px -4px #333;
-		-moz-box-shadow: 0 7px 4px -4px #333;
-		box-shadow: 0 7px 4px -4px #333;			
-		border-radius: 10px;
+		margin-bottom: 10px;
+	}
+	blockquote small {
+    	color: #ccc;
+	}
+	.treeview ul {
+		background:transparent;
+	}
+	.navbar-inner {
+		background: rgba(0,0,0,0.5);
+		border-color: #000;
+		border-radius: 0;
+	}
+	textarea, input[type="text"], input[type="password"] {
+		color: #fff;
+		background: #000;
+		border-radius: 0;
+		border:0;
 	}
 	@media (max-width: 767px) {
 		#footer {
@@ -64,8 +77,7 @@
 			padding-right: 5px;}        
 	}
 </style>
-<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-<link href="js/jquery.treeview/jquery.treeview.css" rel="stylesheet">
+
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>

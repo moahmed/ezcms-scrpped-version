@@ -62,9 +62,9 @@ if (isset($_REQUEST['Submit'])) {
 			<div class="container-fluid" style="margin:60px auto 30px;">
 			  <div class="row-fluid">
 
-			    <div class="span3"></div>
+			    <div class="span4"></div>
 
-				<div class="span6 white-boxed">
+				<div class="span4 white-boxed">
 
 					<blockquote>
 					  <p>Change your password</p>
@@ -96,11 +96,11 @@ if (isset($_REQUEST['Submit'])) {
 							data-toggle="tooltip" data-placement="top"
 							class="input-block-level tooltipme2">
 
-						<input type="submit" name="Submit" class="btn btn-primary" value="Change password">
+						<input type="submit" name="Submit" class="btn btn-inverse" value="Change password">
 
 					</form>
 				</div>
-				<div class="span3"></div>
+				<div class="span4"></div>
 			  </div>
 			</div>
 		</div>

@@ -9,11 +9,25 @@
  * Include: starts the session and checks if user is logged in and connects db
  * To be included on all logged in pages of admin
  */
-session_start();
-if (!isset($_SESSION['LOGGEDIN'])) $_SESSION['LOGGEDIN'] = false;
-if ($_SESSION['LOGGEDIN'] == false) { 
-	header("Location: index.php?flg=expired"); exit; 
+ 
+// Start SESSION if not started 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+	session_start(); 
 }
-include('../config.php');
+
+// Set SESSION ADMIN Login Flag to false if not set
+if (!isset($_SESSION['LOGGEDIN'])) {
+	$_SESSION['LOGGEDIN'] = false;
+}
+
+// Redirect the user if NOT logged in
+if ($_SESSION['LOGGEDIN'] == false) { 
+	header("Location: index.php?flg=expired"); 
+	exit; 
+}
+
+// **************** DATABASE ****************
+require_once ("../config.php"); // PDO Class for database access
 $dbh = new db; // database handle
+
 ?>
