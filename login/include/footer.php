@@ -11,13 +11,7 @@
  */
 
 // Fetch the site stats
-$stats = $dbh->query('SELECT 
-	(SELECT Count(0) from `pages` where `published`=1) as ispublished, 
-	(SELECT Count(0) from `pages` where `published`=0) as unpublished')->fetch(PDO::FETCH_ASSOC);
-	
-// Get the total pages
-$totalPages = $stats['ispublished']+$stats['unpublished'];
-
+$stats = $dbh->query('SELECT COUNT(DISTINCT `url`) as `ispublished` from `pages` where `published`=1')->fetch(PDO::FETCH_ASSOC);
 ?>
 <div class="clearfix"></div>
 <div id="footer">
@@ -26,11 +20,9 @@ $totalPages = $stats['ispublished']+$stats['unpublished'];
       <div class="span3"><a target="_blank" href="http://www.hmi-tech.net/">&copy; HMI Technologies</a> 
 	  </div>
       <div class="span6"> 
-	  	Published: <span class="label label-info"><?php echo $stats['ispublished']; ?> page(s)</span> &middot; 
-		Unpublished: <span class="label"><?php echo $stats['unpublished']; ?> page(s)</span> &middot; 
-		Total: <span class="label label-inverse"><?php echo $totalPages; ?> pages</span> 
+  	    <a href="../sitemap.xml"><strong><?php echo $stats['ispublished']; ?></strong> published page(s)</a>	  
 	  </div>
-      <div class="span3"> ezCMS Ver:<strong>4.160210</strong> </div>
+      <div class="span3"> <a target="_blank" href="http://www.hmi-tech.net/">ezCMS Version: <strong>4.160210</strong></a> </div>
     </div>
   </div>
 </div>

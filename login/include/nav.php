@@ -21,7 +21,7 @@
 		<span class="icon-bar"></span> 
 		<span class="icon-bar"></span> 
 	  </button>
-	  <a class="brand" href="/"><small>ezCMS &middot; <?php echo $_SERVER['HTTP_HOST']; ?></small></a>
+	  <a class="brand" href="/"><small>ezCMS : <?php echo $_SERVER['HTTP_HOST']; ?></small></a>
 	  <div class="nav-collapse collapse">
 
 		<ul class="nav" id="top-bar">
@@ -54,12 +54,12 @@
 					<li><a href="profile.php"><i class="icon-comment"></i> Change Password</a></li>
 					<li class="divider"></li>
 					<li class="nav-header">Select Editor</li>
+					<li <?php echo $eda; ?>>
+						<a href="scripts/chg-editor.php?etype=1">
+							<i class="icon-folder-close"></i> EditArea</a></li>					
 					<li <?php echo $cke; ?>>
 						<a href="scripts/chg-editor.php?etype=0">
 							<i class="icon-calendar"></i> CKEditor</a></li>
-					<li <?php echo $eda; ?>>
-						<a href="scripts/chg-editor.php?etype=1">
-							<i class="icon-folder-close"></i> EditArea</a></li>
 					<li <?php echo $txt; ?>>
 						<a href="scripts/chg-editor.php?etype=2">
 							<i class="icon-hdd"></i> TextArea</a></li>

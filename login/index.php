@@ -79,16 +79,22 @@ switch ($flg) {
 			max-width: 300px;
 			padding: 19px 29px 29px;
 			margin: 60px auto 10px;
+			background: rgba(0,0,0,0.5);
+			
+			/* border-radius: 10px; 
+			box-shadow: 1px 1px 2px rgba(0,0,0,.5);
+			border: 1px solid #999;
 			background-color: #fff;
-			border: 1px solid #e5e5e5;
-			border-radius: 10px;
-			box-shadow: 0 1px 2px rgba(0,0,0,.05);}
-		.form-signin .form-signin-heading,
-		.form-signin .checkbox {margin-bottom: 10px;}
+			*/
+		}
+		.form-signin .form-signin-heading{
+			margin-bottom: 10px; 
+			text-align:center; 
+			text-shadow: 2px 2px 3px rgba(150, 150, 150, 1);}
 		.form-signin input[type="text"],
 		.form-signin input[type="password"],
 		.form-signin select {
-			font-size: 16px;
+			font-size: 14px;
 			margin-bottom: 15px;
 			padding: 7px 9px;}
 		@media (max-width: 767px) {
@@ -104,15 +110,14 @@ switch ($flg) {
 		<div class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="navbar-inner">
 			  <a class="brand" href="/">ezCMS &middot; <?php echo $_SERVER['HTTP_HOST']; ?></a>
-			  <div class="pull-right" style="color: #FFFFFF;margin: 10px 10px 2px 2px;">Your ip <strong>
-				<?php echo $_SERVER['REMOTE_ADDR']; ?></strong> is logged for security</div>
+			  <div class="pull-right" style="color: #FFFFFF;margin: 10px 10px 2px 2px;">Your IP <strong>
+				<?php echo $_SERVER['REMOTE_ADDR']; ?></strong> is Logged</div>
 			  <div class="clearfix"></div>
 		  </div>
 		</div>
 		<div class="container">
 			<form id="frm-login" class="form-signin" method="post" action="scripts/login.php">
-				<img src="../site-assets/HMI-logo.png" >
-				<h2 class="form-signin-heading">Please sign in</h2>
+				<h3 class="form-signin-heading"><img src="../site-assets/logo.jpg" ><br>Please sign in</h3>
 				<?php echo $msg; ?>
 				<input type="text" id="txtemail" name="userid"
 					class="input-block-level tooltipme2" 

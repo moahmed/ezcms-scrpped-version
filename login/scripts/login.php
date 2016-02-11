@@ -9,10 +9,11 @@
  * script: logs in the user to the site
  *
  */
+
 session_start();
 if (!isset($_SESSION['SESSION' ])) $_SESSION['SESSION' ] = true;
 if (!isset($_SESSION['LOGGEDIN'])) $_SESSION['LOGGEDIN'] = false;
-include      ('../../config.php');
+include('../../config.php');
 
 // reset session variables...
 $_SESSION['USERID'] = "";

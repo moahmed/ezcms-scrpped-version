@@ -23,16 +23,22 @@
 	body {
 		background: url('img/bg.png');
 		background-attachment: fixed;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: bottom;
+		color:#fff;
 	}
 	.nav-tabs > .active > a, .nav-tabs > .active > a:hover,
 	a,button { outline:none; }
+	a { color: #FEFF41; }
+	a:hover { color: #fff; }
 	#wrap {
 		min-height: 100%;
 		height: auto !important;
 		height: 100%;
-		margin: 0 auto -30px;}
+		margin: 0 auto -40px;}
 	#push,#footer {height: 30px;}
-	#footer {background-color: #f5f5f5;}
+	#footer {    background-color: #000; padding-top: 10px;}
 	.tooltip-inner {font-size:18px;}
 	.label, .badge {white-space:normal;}
 	div.white-boxed {
