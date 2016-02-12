@@ -238,7 +238,7 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 
 					<?php echo $msg; ?>
 
-				    <div class="tabbable tabs-left">
+				    <div class="tabbable tabs-top">
 					<ul class="nav nav-tabs" id="myTab">
 					  <li class="active"><a href="#d-main">Main</a></li>
 					  <li><a href="#d-content">Content</a></li>
@@ -647,26 +647,7 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 		}
 	});
 </script>
-<script language="javascript" type="text/javascript" src="js/edit_area/edit_area_full.js"></script>
 
-<?php if ($_SESSION['EDITORTYPE'] == 0) { ?>
-	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript">
-	  CKEDITOR.replace( 'txtMain'  , { uiColor : '#AAAAFF' });
-	  CKEDITOR.replace( 'txtHeader', { uiColor : '#59ACFF' });
-	  CKEDITOR.replace( 'txtrSide' , { uiColor : '#FFD5AA' });
-	  CKEDITOR.replace( 'txtSide'  , { uiColor : '#FFAAAA' });
-	  CKEDITOR.replace( 'txtFooter', { uiColor : '#CCCCCC' });
-	</script>
-<?php } else if ($_SESSION['EDITORTYPE'] == 1) { ?>
-		<script language="javascript" type="text/javascript">
-			var txtMain_loaded = false;
-			var txtHeader_loaded = false;
-			var txtFooter_loaded = false;
-			var txtSide_loaded = false;
-			var txtSider_loaded = false;
-		</script>
-<?php } ?>
 <script language="javascript" type="text/javascript">
 	if(window.location.hash) $('a[href="'+window.location.hash.replace('#','#d-')+'"]').click();
 </script>

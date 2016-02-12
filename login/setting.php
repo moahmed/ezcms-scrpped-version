@@ -135,63 +135,6 @@ if ($flg=="noperms")
 	$('#myTab a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
-		if ((!txtHeader_loaded)&&($(this).attr('href')=='#d-header')) {
-			editAreaLoader.init({
-				id:"txtHeader",
-				syntax: "html",
-				allow_toggle: false,
-				start_highlight: true,
-				toolbar: "search, go_to_line, |, undo, redo, |, select_font, |, syntax_selection, |, change_smooth_selection, highlight, reset_highlight"
-			});
-			txtHeader_loaded = true;
-		}
-		if ((!txtFooter_loaded)&&($(this).attr('href')=='#d-footer')) {
-			editAreaLoader.init({
-				id:"txtFooter",
-				syntax: "html",
-				allow_toggle: false,
-				start_highlight: true,
-				toolbar: "search, go_to_line, |, undo, redo, |, select_font, |, syntax_selection, |, change_smooth_selection, highlight, reset_highlight"
-			});
-			txtFooter_loaded = true;
-		}
-		if ((!txtSider_loaded)&&($(this).attr('href')=='#d-siderbar')) {
-			editAreaLoader.init({
-				id:"txtrSide",
-				syntax: "html",
-				allow_toggle: false,
-				start_highlight: true,
-				toolbar: "search, go_to_line, |, undo, redo, |, select_font, |, syntax_selection, |, change_smooth_selection, highlight, reset_highlight"
-			});
-			txtSider_loaded = true;
-		}
-		if ((!txtSide_loaded)&&($(this).attr('href')=='#d-sidebar')) {
-			editAreaLoader.init({
-				id:"txtSide",
-				syntax: "html",
-				allow_toggle: false,
-				start_highlight: true,
-				toolbar: "search, go_to_line, |, undo, redo, |, select_font, |, syntax_selection, |, change_smooth_selection, highlight, reset_highlight"
-			});
-			txtSide_loaded = true;
-		}
 	});
 </script>
-<?php if ($_SESSION['EDITORTYPE'] == 0) { ?>
-	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-	<script type="text/javascript">
-	  CKEDITOR.replace( 'txtHeader', { uiColor : '#59ACFF' });
-	  CKEDITOR.replace( 'txtrSide' , { uiColor : '#FFD5AA' });
-	  CKEDITOR.replace( 'txtSide'  , { uiColor : '#FFAAAA' });
-	  CKEDITOR.replace( 'txtFooter', { uiColor : '#CCCCCC' });
-	</script>
-<?php } else if ($_SESSION['EDITORTYPE'] == 1) { ?>
-	<script language="javascript" type="text/javascript" src="js/edit_area/edit_area_full.js"></script>
-		<script language="javascript" type="text/javascript">
-			var txtHeader_loaded = false;
-			var txtFooter_loaded = false;
-			var txtSide_loaded = false;
-			var txtSider_loaded = false;
-		</script>
-<?php } ?>
 </body></html>

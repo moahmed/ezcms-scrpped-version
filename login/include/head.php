@@ -64,6 +64,15 @@
 		border-radius: 0;
 		border:0;
 	}
+	.alert {
+		border-radius:0;
+		border: none;
+	}
+	.alert-danger, .alert-error {
+		color: #f2dede;
+		background-color: #b94a48;
+		text-shadow:none;
+	}
 	@media (max-width: 767px) {
 		#footer {
 			margin-left: -20px;

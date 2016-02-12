@@ -58,17 +58,10 @@ if ($flg=="noperms")
 	</div>
 
 <?php include('include/footer.php'); ?>
-<script language="javascript" type="text/javascript" src="js/edit_area/edit_area_full.js"></script>
 <script type="text/javascript">
 	$("#top-bar li").removeClass('active');
 	$("#top-bar li:eq(0)").addClass('active');
 	$("#top-bar li:eq(0) ul li:eq(1)").addClass('active');
-	editAreaLoader.init({
-		id:"txtContents", 
-		syntax: "php",
-		allow_toggle: true,
-		start_highlight: true,
-		toolbar: "search, go_to_line, |, undo, redo, |, select_font, |, change_smooth_selection, highlight, reset_highlight"
-	});
+
 </script>
 </body></html>
