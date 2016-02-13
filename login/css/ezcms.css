@@ -17,11 +17,16 @@ a:hover { color: #fff; }
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -40px;}
-#push,#footer {height: 30px;}
-#footer {    background-color: #000; padding-top: 10px;}
+	margin: 0 auto -40px;
+}
+#footer { height: 30px; background: #000; padding-top: 10px;}
 .tooltip-inner {font-size:18px;}
 .label, .badge {white-space:normal;}
+#wrap .container {
+	padding-top:60px;
+	margin: 0 auto; 
+	width:95%;
+}
 div.white-boxed {
 	background: rgba(0,0,0,0.75);
 	padding: 10px;
@@ -30,7 +35,7 @@ div.white-boxed {
 .form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;
-	margin: 60px auto 10px;
+	margin: 0 auto;
 	background: rgba(0,0,0,0.75);
 }
 .form-signin .form-signin-heading{
@@ -82,6 +87,13 @@ textarea, input[type="text"], input[type="password"] {
 .alert-warning {
     color: #fcf8e3;
     background-color: #c09853;
+}
+
+@media (max-width: 980px) {
+	#wrap .container {
+		padding-top:0;
+		margin-bottom:50px;
+	}
 }
 
 @media (max-width: 767px) {

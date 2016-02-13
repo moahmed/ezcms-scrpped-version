@@ -44,7 +44,7 @@ if ($flg=="noperms")
 		<?php include('include/nav.php'); ?>  
 		<div class="container">
 				
-				<div class="white-boxed" style="margin:60px auto 10px; width:95%;">
+				<div class="white-boxed">
 					<form id="frmHome" action="scripts/set-controller.php" method="post" enctype="multipart/form-data">
 					<div class="navbar">
 						<div class="navbar-inner">
@@ -55,6 +55,7 @@ if ($flg=="noperms")
 					<textarea name="txtContents" id="txtContents" class="input-block-level"
 				  		style="height: 420px; width:100%"><?php echo $content; ?></textarea>
 					</form>
+					
 				</div>
 			  </div>
 

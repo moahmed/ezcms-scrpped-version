@@ -61,7 +61,7 @@ if ($flg=="noperms")
 	<div id="wrap">
 		<?php include('include/nav.php'); ?>
 		<div class="container">
-			<div class="container-fluid" style="margin:60px auto 30px;">
+			<div class="container-fluid">
 			  <div class="row-fluid">
 				<div class="span3 white-boxed">
 

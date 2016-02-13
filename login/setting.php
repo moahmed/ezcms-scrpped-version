@@ -46,7 +46,7 @@ if ($flg=="noperms")
 	<div id="wrap">
 		<?php include('include/nav.php'); ?>
 		<div class="container">
-			<div class="white-boxed" style="margin:60px auto 10px; width:95%;">
+			<div class="white-boxed">
 			  <form id="frmHome" action="scripts/set-defaults.php" method="post" enctype="multipart/form-data" class="form-horizontal">
 				<div class="navbar">
 					<div class="navbar-inner">

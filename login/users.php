@@ -144,7 +144,7 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 	<div id="wrap">
 		<?php include('include/nav.php'); ?>
 		<div class="container">
-			<div class="container-fluid" style="margin:60px auto 30px;">
+			<div class="container-fluid">
 			  <div class="row-fluid">
 				<div class="span3 white-boxed"><?php getUserTreeHTML($id); ?></div>
 				<div class="span9 white-boxed">
