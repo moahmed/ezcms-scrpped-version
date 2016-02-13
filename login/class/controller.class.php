@@ -50,14 +50,19 @@ class ezController extends ezCMS {
 			die('Invalid Request');
 		}
 		
-		// Check if controller is writeable
-		if (!is_writable('../index.php')) {
-			header("Location: controllers.php?flg=unwriteable");
-			exit;
-		}
-		
 		// Fetch the contents
 		$contents = $_POST["txtContents"];
+		
+		// Check if controller is writeable
+		if (!is_writable('../index.php')) {
+			$this->flg = 'unwriteable';
+			$this->content = htmlspecialchars($contents);
+			return;
+			//header("Location: controllers.php?flg=unwriteable");
+			//exit;
+			
+		}
+		
 		
 		if (file_put_contents('../index.php', $contents )) {
 			header("Location: controllers.php?flg=saved");
