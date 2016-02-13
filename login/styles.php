@@ -9,7 +9,12 @@
  * View: Displays the css style sheets in the site
  *
  */
-require_once("include/init.php");
+ 
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
+
+
 $filelist = '';
 if (isset($_GET['show'])) $filename = $_GET['show']; else $filename = "../style.css";
 if ($handle = opendir('../site-assets/css')) {

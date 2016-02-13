@@ -9,7 +9,11 @@
  * View: Displays the js files in the site
  *
  */
-require_once("include/init.php");
+
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
+
 $filelist = '';
 if (isset($_GET['show'])) $filename = $_GET['show']; else $filename = "../main.js";
 if ($handle = opendir('../site-assets/js')) {

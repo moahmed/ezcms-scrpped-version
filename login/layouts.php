@@ -9,7 +9,11 @@
  * View: Displays the layouts in the site
  * 
  */
-require_once("include/init.php");
+ 
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
+
 if (isset($_GET['show'])) $filename = $_GET['show']; else $filename = "layout.php";
 $content = @fread(fopen('../'.$filename, "r"), filesize('../'.$filename));
 $content =  htmlspecialchars($content);

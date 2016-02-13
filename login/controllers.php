@@ -9,7 +9,11 @@
  * View: Displays the php controller of the site
  * /index.php
  */
-require_once("include/init.php");
+
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
+
 $filename = "../index.php";
 $content = @fread(fopen($filename, "r"), filesize($filename));
 $content =  htmlspecialchars($content);
@@ -38,7 +42,7 @@ if ($flg=="noperms")
   
 	<div id="wrap">
 		<?php include('include/nav.php'); ?>  
-		<div class="container" style="margin-bottom:40px ">
+		<div class="container">
 				
 				<div class="white-boxed" style="margin:60px auto 10px; width:95%;">
 					<form id="frmHome" action="scripts/set-controller.php" method="post" enctype="multipart/form-data">
@@ -62,6 +66,5 @@ if ($flg=="noperms")
 	$("#top-bar li").removeClass('active');
 	$("#top-bar li:eq(0)").addClass('active');
 	$("#top-bar li:eq(0) ul li:eq(1)").addClass('active');
-
 </script>
 </body></html>

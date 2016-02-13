@@ -9,7 +9,11 @@
  * View: Displays the web pages in the site
  *
  */
-require_once("include/init.php");
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
+
+
 require_once("include/pages.functions.php");
 
 if (isset( $_REQUEST["id"])) $id = $_REQUEST["id"]; else $id = 1;
@@ -57,14 +61,6 @@ if (isset($_REQUEST['Submit'])) {
 	$redirect 	    =  ''; //($_REQUEST['txtRedirect']);
 	if (isset($_REQUEST['slGroup'])) $parentid = ($_REQUEST['slGroup']); else $parentid = '0';
 	$slLayout		= ($_REQUEST['slLayout']);
-
-	//if(isset($_REQUEST['ckRedirect' ])) $isredirected  =1; else
-		$isredirected = '';
-	if(isset($_REQUEST['ckPublished'])) $published     =1; else $published    = '';
-	//if(isset($_REQUEST['ckInsMenu'  ])) $showinsmenu   =1; else
-		$showinsmenu  = '';
-	//if(isset($_REQUEST['ckInMenu'   ])) $showinmenu    =1; else
-		$showinmenu   = '';
 	if(isset($_REQUEST['ckside'     ])) $useside       =1; else $useside      = '';
 	if(isset($_REQUEST['cksider'    ])) $usesider      =1; else $usesider     = '';
 	if(isset($_REQUEST['ckHeader'   ])) $useheader     =1; else $useheader    = '';

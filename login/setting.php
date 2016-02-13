@@ -9,9 +9,12 @@
  * View: Displays the default setting of the site
  *
  */
-require_once("include/init.php");
+ 
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
 
-$site = $dbh->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
+$site = $cms->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
 		->fetch(PDO::FETCH_ASSOC); // get the site details
 $title       = '';
 $keywords    = '';
@@ -42,7 +45,7 @@ if ($flg=="noperms")
 
 	<div id="wrap">
 		<?php include('include/nav.php'); ?>
-		<div class="container" style="margin-bottom:40px ">
+		<div class="container">
 			<div class="white-boxed" style="margin:60px auto 10px; width:95%;">
 			  <form id="frmHome" action="scripts/set-defaults.php" method="post" enctype="multipart/form-data" class="form-horizontal">
 				<div class="navbar">
@@ -52,7 +55,7 @@ if ($flg=="noperms")
 				</div>
 				<?php echo $msg; ?>
 
-				<div class="tabbable tabs-left">
+				<div class="tabbable tabs-top">
 				<ul class="nav nav-tabs" id="myTab">
 				  <li class="active"><a href="#d-main">Main</a></li>
 				  <li><a href="#d-header">Header</a></li>
@@ -106,16 +109,16 @@ if ($flg=="noperms")
 
 					</div>
 					<div class="tab-pane" id="d-header">
-						<textarea name="txtHeader" rows="30" id="txtHeader" style="width:98%;"><?php echo $header; ?></textarea>
+						<textarea name="txtHeader" id="txtHeader" style="width:98%; height:300px"><?php echo $header; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-sidebar">
-						<textarea name="txtSide" rows="30" id="txtSide" style="width:98%;"><?php echo $sidebar; ?></textarea>
+						<textarea name="txtSide" id="txtSide" style="width:98%; height:300px"><?php echo $sidebar; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-siderbar">
-						<textarea name="txtrSide" rows="30" id="txtrSide" style="width:98%;"><?php echo $siderbar; ?></textarea>
+						<textarea name="txtrSide" id="txtrSide" style="width:98%; height:300px"><?php echo $siderbar; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-footer">
-						<textarea name="txtFooter" id="txtFooter" rows="30" style="width:98%;"><?php echo $footer; ?></textarea>
+						<textarea name="txtFooter" id="txtFooter" style="width:98%; height:300px"><?php echo $footer; ?></textarea>
 					</div>
 				</div>
 				</div>

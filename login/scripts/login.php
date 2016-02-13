@@ -59,8 +59,6 @@ if ($stmt->rowCount()) {
 	//login the user
 	$_SESSION['LOGGEDIN']   = true;  // login flag to TRUE
 	$_SESSION['USERID']     = $user['id']; // User's ID
-	$_SESSION['LOGINNAME']  = $user['username']; // User's Name
-	$_SESSION['EDITORTYPE'] = $user['editor']; // Check editor and use it	
 	
 	// Redirect to logged in page
 	header("Location: ../pages.php");	

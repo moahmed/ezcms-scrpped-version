@@ -10,8 +10,9 @@
  *
  */
  
-// Include the Init 
-require_once("include/init.php");
+// **************** ezCMS CLASS ****************
+require_once ("ezcms.class.php"); // CMS Class for database access
+$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
  
 // Class to handle post data
 class cmsProfile {
@@ -36,7 +37,7 @@ class cmsProfile {
 	private function update() {
 	
 		// Get handle to database
-		global $dbh;
+		global $cms;
 		
 		// check all the variables are posted
 		if ( (!isset($_POST['txtcpass'])) || (!isset($_POST['txtnpass'])) || (!isset($_POST['txtrpass'])) ) {
@@ -65,14 +66,14 @@ class cmsProfile {
 		
 		// Prepare SQL to fetch user's record from dataabse
 		$id = $_SESSION['USERID'];
-		$stmt = $dbh->prepare("SELECT `id` FROM `users` WHERE `id` = $id AND `passwd` = SHA2( ? , 512 ) LIMIT 1");
+		$stmt = $cms->prepare("SELECT `id` FROM `users` WHERE `id` = $id AND `passwd` = SHA2( ? , 512 ) LIMIT 1");
 		$stmt->execute( array($curpass) );
 
 		// Check if User Record is present and returned from the database
 		if ($stmt->rowCount()) {
 		
 			// update the password  here
-			$stmt = $dbh->prepare("UPDATE `users` SET `passwd` = SHA2( ? , 512 ) WHERE `id` = $id ");
+			$stmt = $cms->prepare("UPDATE `users` SET `passwd` = SHA2( ? , 512 ) WHERE `id` = $id ");
 			if ($stmt->execute( array($newpass) ) ) {
 				// Database update done
 				$this->setMsgHTML('success','New Password Saved !',
@@ -90,13 +91,6 @@ class cmsProfile {
 		$this->setMsgHTML('error','Current Password Mismatch !',
 			'Your current password is incorrect.');
 
-	}
-	
-	// this function will set the formatted html to display
-	private function setMsgHTML($class, $caption, $subcaption ) {
-		$this->msg = '<div class="alert alert-'.$class.'">
-			<button type="button" class="close" data-dismiss="alert">x</button>
-			<strong>'.$caption.'</strong><br>'.$subcaption.'</div>';
 	}
 	
 }

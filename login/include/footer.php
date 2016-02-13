@@ -11,7 +11,7 @@
  */
 
 // Fetch the site stats
-$stats = $dbh->query('SELECT COUNT(DISTINCT `url`) as `ispublished` from `pages` where `published`=1')->fetch(PDO::FETCH_ASSOC);
+$stats = $cms->query('SELECT COUNT(DISTINCT `url`) as `ispublished` from `pages` where `published`=1')->fetch(PDO::FETCH_ASSOC);
 ?>
 <div class="clearfix"></div>
 <div id="footer">

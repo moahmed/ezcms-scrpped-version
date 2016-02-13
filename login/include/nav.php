@@ -8,10 +8,12 @@
  *
  * Include: Displays the navigation bar
  * 
- */
+
 	if ($_SESSION['EDITORTYPE']==0) $cke = 'class="badge-warning"'; else $cke = '';
 	if ($_SESSION['EDITORTYPE']==1) $eda = 'class="badge-warning"'; else $eda = '';
 	if ($_SESSION['EDITORTYPE']==2) $txt = 'class="badge-warning"'; else $txt = ''; 
+	
+ */	
 ?>
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
@@ -49,18 +51,18 @@
 		<ul class="nav pull-right">
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-share"></i>
-					Welcome <?php echo $_SESSION['LOGINNAME']?> <b class="caret"></b></a>
+					Welcome <?php echo $cms->usr['username']; ?> <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="profile.php"><i class="icon-comment"></i> Change Password</a></li>
 					<li class="divider"></li>
 					<li class="nav-header">Select Editor</li>
-					<li <?php echo $eda; ?>>
+					<li>
 						<a href="scripts/chg-editor.php?etype=1">
 							<i class="icon-folder-close"></i> EditArea</a></li>					
-					<li <?php echo $cke; ?>>
+					<li>
 						<a href="scripts/chg-editor.php?etype=0">
 							<i class="icon-calendar"></i> CKEditor</a></li>
-					<li <?php echo $txt; ?>>
+					<li>
 						<a href="scripts/chg-editor.php?etype=2">
 							<i class="icon-hdd"></i> TextArea</a></li>
 					<li class="divider"></li>
