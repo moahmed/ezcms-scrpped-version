@@ -1,16 +1,16 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net and mosh.ahmed@gmail.com
  *
- * Version 4.0.0 Dated 06-Fec-2016
- * HMI Technologies Mumbai (2015-16)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
  * Controller: Front-end Controller - index.php
- * Renders all the pages in the site builder.
+ * Renders all the pages in the CMS.
  */
 
-// Uncomment the code below to redirect to ssl.
-// Alternatively you can use the htaccess file.
+// Un-comment the code below to redirect to ssl.
+// Alternatively you can use the .htaccess file.
 // **************** SSL REDIRECT ****************
 /*
 if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
@@ -24,7 +24,7 @@ if(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 // **************** Page Protocol ****************
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https://" : "http://";
 
-// Uncomment the code below to redirect to WWW.
+// Un-comment the code below to redirect to WWW.
 // Alternatively you can use the htaccess file.
 // **************** WWW REDIRECT ****************
 /*
@@ -71,7 +71,7 @@ if ($stmt->rowCount()) {
 		}
 		
 		 // Check if Admin is logged in - 
-		 // unpublished pagaes are avisible to ADMIN.
+		 // unpublished pages are visible to ADMIN.
 		if (!$_SESSION['LOGGEDIN']) {
 			// If ADMIN is NOT logged in then serve 404 page as it is unpublished
 			$stmt->execute( array('/Page-Not-Found.html') );
@@ -106,10 +106,10 @@ $sidebar     = ($page["useside"]   == 1) ? $page["sidecontent"]   : $site["sidec
 $siderbar    = ($page["usesider"]  == 1) ? $page["sidercontent"]  : $site["sidercontent"];
 $footer      = ($page["usefooter"] == 1) ? $page["footercontent"] : $site["footercontent"];
 // you can add your own variable here, eg: $mymodscrp = '';
-// This variable are avaiable in layout files for use.
+// This variable are available in layout files for use.
 
 
-// Set 404 header when servering page not found
+// Set 404 header when severing page not found
 if ($page['url']=='/Page-Not-Found.html') {
 	Header("HTTP/1.0 404 Not Found");
 }

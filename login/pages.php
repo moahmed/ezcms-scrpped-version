@@ -10,7 +10,7 @@
  *
  */
 // **************** ezCMS CLASS ****************
-require_once ("ezcms.class.php"); // CMS Class for database access
+require_once ("class/ezcms.class.php"); // CMS Class for database access
 $cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
 
 

@@ -59,11 +59,15 @@ blockquote small {
 	border-color: #000;
 	border-radius: 0;
 }
-textarea, input[type="text"], input[type="password"] {
+textarea, input[type="text"], input[type="password"], select {
 	color: #fff;
 	background: #000;
 	border-radius: 0;
 	border:0;
+}
+#txtContents {
+	height: 420px; 
+	width:100%;
 }
 .alert {
 	border-radius:0;
