@@ -21,7 +21,7 @@ if ($handle = opendir('../site-assets/css')) {
 	while (false !== ($entry = readdir($handle))) {
 		if (preg_match('/\.css$/i',$entry)) {
 			if ($filename==$entry) $myclass = 'label label-info'; else $myclass = '';
-			$filelist .= '<li><i class="icon-tint"></i> <a href="styles.php?show='.
+			$filelist .= '<li><i class="icon-tint icon-white"></i> <a href="styles.php?show='.
 				$entry.'" class="'.$myclass.'">'.$entry.'</a></li>';
 		}
 	}
@@ -67,7 +67,7 @@ if ($flg=="noperms")
 				<div class="span3 white-boxed">
 
 					<ul id="left-tree">
-					  <li class="open" ><i class="icon-pencil"></i>
+					  <li class="open" ><i class="icon-pencil icon-white"></i>
 						<a class="<?php if ($filename=="../style.css") echo 'label label-info'; ?>" href="styles.php">style.css</a>
 					  	<ul><?php echo $filelist; ?></ul>
 					  </li>

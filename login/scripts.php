@@ -20,7 +20,7 @@ if ($handle = opendir('../site-assets/js')) {
 	while (false !== ($entry = readdir($handle))) {
 		if (preg_match('/\.js$/i',$entry)) {
 			if ($filename==$entry) $myclass = 'label label-info'; else $myclass = '';
-			$filelist .= '<li><i class="icon-indent-left"></i> <a href="scripts.php?show='.
+			$filelist .= '<li><i class="icon-indent-left icon-white"></i> <a href="scripts.php?show='.
 				$entry.'" class="'.$myclass.'">'.$entry.'</a></li>';
 		}
 	}
@@ -66,7 +66,7 @@ if ($flg=="noperms")
 				<div class="span3 white-boxed">
 
 					<ul id="left-tree">
-					  <li class="open" ><i class="icon-align-left"></i>
+					  <li class="open" ><i class="icon-align-left icon-white"></i>
 						<a class="<?php if ($filename=="../main.js") echo 'label label-info'; ?>" href="scripts.php">main.js</a>
 					  	<ul><?php echo $filelist; ?></ul>
 					  </li>

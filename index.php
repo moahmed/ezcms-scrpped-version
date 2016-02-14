@@ -46,30 +46,30 @@ $site = $dbh->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
 
 // **************** REQUESTED URI ****************
 $uri = strtok($_SERVER["REQUEST_URI"],'?'); // get the requested URI
-		
+
 // **************** PAGE DETAILS ****************
 $stmt = $dbh->prepare('SELECT * FROM `pages` WHERE `url` = ? ORDER BY `id` DESC LIMIT 1');
 $stmt->execute( array($uri) );
 
 // Check if page is found in database.
 if ($stmt->rowCount()) { 
-	
+
 	// Page is found in Database
 	$page = $stmt->fetch(PDO::FETCH_ASSOC);
-	
+
 	// Check if page is published or not.
 	if (!$page["published"]) { 
-	
+
 		// Start session if not started to check ADMIN login status
 		if (session_status() !== PHP_SESSION_ACTIVE) {
 			session_start(); 
 		}
-		
+
 		// Set SESSION ADMIN Login Flag to false if not set
 		if (!isset($_SESSION['LOGGEDIN'])) {
 			$_SESSION['LOGGEDIN'] = false;
 		}
-		
+
 		 // Check if Admin is logged in - 
 		 // unpublished pages are visible to ADMIN.
 		if (!$_SESSION['LOGGEDIN']) {
@@ -77,14 +77,14 @@ if ($stmt->rowCount()) {
 			$stmt->execute( array('/Page-Not-Found.html') );
 			$page = $stmt->fetch(PDO::FETCH_ASSOC);
 		}
-		
+
 	}
 } else { 
 	// Page is NOT found, server 404 page
 	$stmt->execute( array('/Page-Not-Found.html') );
 	$page = $stmt->fetch(PDO::FETCH_ASSOC);
 }
-		
+
 // Verify the layout files to be used, 
 // fall back to default if not found
 if (!file_exists($page['layout'])) {

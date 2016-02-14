@@ -53,14 +53,14 @@ if ($flg=="noperms")
 				<div class="span3 white-boxed">
 				
 					<ul id="left-tree">
-					  <li class="open" ><i class="icon-list-alt"></i> 
+					  <li class="open" ><i class="icon-list-alt icon-white"></i> 
 					  	<a class="<?php if ($filename=="layout.php") echo 'label label-info'; ?>" href="layouts.php">layout.php</a>
 					  	<ul>
 							<?php if ($handle = opendir('..')) {
 									while (false !== ($entry = readdir($handle))) {
 										if (preg_match('/^layout\.[a-z0-9_-]+\.php$/i',$entry)) {
 											if ($filename==$entry) $myclass = 'label label-info'; else $myclass = '';
-											echo '<li><i class="icon-list-alt"></i> <a href="layouts.php?show='.
+											echo '<li><i class="icon-list-alt icon-white"></i> <a href="layouts.php?show='.
 												$entry.'" class="'.$myclass.'">'.$entry.'</a></li>';
 										}
 									}

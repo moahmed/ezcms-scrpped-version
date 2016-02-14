@@ -38,16 +38,16 @@ class ezController extends ezCMS {
 	// Function to Update the Controller
 	private function update() {
 	
-		// Check permissions
-		if (!$this->usr['editcont']) {
-			header("Location: controllers.php?flg=noperms");
-			exit;
-		}
-		
 		// Check all the variables are posted
 		if ( (!isset($_POST['Submit'])) || (!isset($_POST['txtContents'])) ) {
 			header('HTTP/1.1 400 BAD REQUEST');
 			die('Invalid Request');
+		}
+
+		// Check permissions
+		if (!$this->usr['editcont']) {
+			header("Location: controllers.php?flg=noperms");
+			exit;
 		}
 		
 		// Fetch the contents
@@ -58,9 +58,6 @@ class ezController extends ezCMS {
 			$this->flg = 'unwriteable';
 			$this->content = htmlspecialchars($contents);
 			return;
-			//header("Location: controllers.php?flg=unwriteable");
-			//exit;
-			
 		}
 		
 		
@@ -68,9 +65,9 @@ class ezController extends ezCMS {
 			header("Location: controllers.php?flg=saved");
 			exit;
 		}
-		
-		header("Location: controllers.php?flg=failed");
-		exit;
+
+		$this->flg = 'failed';
+		$this->content = htmlspecialchars($contents);
 		
 	}
 	
