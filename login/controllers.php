@@ -19,13 +19,6 @@ $cms = new ezController();
 
 	<title>Controller : ezCMS Admin</title>
 	<?php include('include/head.php'); ?>
-	<link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css" />
-	<link rel="stylesheet" href="codemirror/theme/liquibyte.css">
-	<style>
-		.CodeMirror {
-		  height: auto;
-		}	
-	</style>
 	
 </head><body>
   
