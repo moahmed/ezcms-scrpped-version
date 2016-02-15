@@ -1,10 +1,9 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net & mosh.ahmed@gmail.com
  *
- * Version 2.010413 Dated 20/March/2013
- * Rev: 14-Apr-2014 (2.140413)
- * HMI Technologies Mumbai (2013-14)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
  * View: Displays the files on the server in the site
  * 
@@ -13,7 +12,6 @@
 // **************** ezCMS CLASS ****************
 require_once ("class/ezcms.class.php"); // CMS Class for database access
 $cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
-
 
 ?><!DOCTYPE html><html lang="en"><head>
 

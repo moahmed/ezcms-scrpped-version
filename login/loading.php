@@ -1,10 +1,9 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net & mosh.ahmed@gmail.com
  *
- * Version 2.010413 Dated 20/March/2013
- * Rev: 14-Apr-2014 (2.140413)
- * HMI Technologies Mumbai (2013-14)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
  * View: Displays a loading page for iframe (used in pages.php)
  * 

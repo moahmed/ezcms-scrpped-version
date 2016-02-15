@@ -5,7 +5,7 @@
  * Version 4.160210
  * HMI Technologies Mumbai
  *
- * Class: ezCMS Controller Class 
+ * Class: ezCMS Users Class 
  * 
  */
 
@@ -14,16 +14,15 @@ require_once ("ezcms.class.php"); // CMS Class for database access
 
 class ezUsers extends ezCMS {
 
-	public $content = '';
+	public $id = '';
+	
+	public $treehtml = '';
 	
 	// Consturct the class
 	public function __construct () {
 	
 		// call parent constuctor
 		parent::__construct();
-		
-		// get the contents of the controller file (index.php)
-		$this->content = htmlspecialchars(file_get_contents("../index.php"));
 		
 		// Update the Controller of Posted
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -50,30 +49,11 @@ class ezUsers extends ezCMS {
 			exit;
 		}
 		
-		// Fetch the contents
-		$contents = $_POST["txtContents"];
-		
-		// Check if controller is writeable
-		if (!is_writable('../index.php')) {
-			$this->flg = 'unwriteable';
-			$this->content = htmlspecialchars($contents);
-			return;
-		}
-		
-		
-		if (file_put_contents('../index.php', $contents )) {
-			header("Location: controllers.php?flg=saved");
-			exit;
-		}
-
-		$this->flg = 'failed';
-		$this->content = htmlspecialchars($contents);
-		
 	}
 	
 	// Function to Set the Display Message
 	private function getMessage() {
-	
+
 		// Set the HTML to display for this flag
 		switch ($this->flg) {
 			case "failed":
@@ -89,8 +69,8 @@ class ezUsers extends ezCMS {
 				$this->setMsgHTML('info','Permission Denied !','You do not have permissions for this action.');
 				break;
 		}
-		
+
 	}
-	
+
 }
 ?>

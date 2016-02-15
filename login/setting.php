@@ -1,18 +1,12 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net & mosh.ahmed@gmail.com
  *
- * Version 2.010413 Dated 20/March/2013
- * Rev: 14-Apr-2014 (2.140413)
- * HMI Technologies Mumbai (2013-14)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
- * View: Displays the default setting of the site
+ * View: Displays the default setting of the CMS
  *
- */
- 
-// **************** ezCMS CLASS ****************
-require_once ("class/ezcms.class.php"); // CMS Class for database access
-$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
 
 $site = $cms->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
 		->fetch(PDO::FETCH_ASSOC); // get the site details
@@ -35,10 +29,18 @@ if ($flg=="green")
 if ($flg=="noperms")
 	$msg = '<div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">x</button>
 				<strong>Permission Denied!</strong> You do not have permissions for this action.</div>';
+ 
+ */
+ 
+// **************** ezCMS SETTINGS CLASS ****************
+require_once ("class/settings.class.php"); 
+
+// **************** ezCMS SETTINGS HANDLE ****************
+$cms = new ezSettings();
 
 ?><!DOCTYPE html><html lang="en"><head>
 
-	<title>Settings &middot; ezCMS Admin</title>
+	<title>Settings : ezCMS Admin</title>
 	<?php include('include/head.php'); ?>
 
 </head><body>
@@ -51,16 +53,29 @@ if ($flg=="noperms")
 				<div class="navbar">
 					<div class="navbar-inner">
 						<input type="submit" name="Submit" value="Save Changes" class="btn btn-inverse">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Revisions <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">See more ...</a></li>
+							</ul>
+						</div>	
+
 					</div>
 				</div>
-				<?php echo $msg; ?>
+				<?php echo $cms->msg; ?>
 
 				<div class="tabbable tabs-top">
 				<ul class="nav nav-tabs" id="myTab">
 				  <li class="active"><a href="#d-main">Main</a></li>
 				  <li><a href="#d-header">Header</a></li>
-				  <li><a href="#d-sidebar">Sidebar A</a></li>
-				  <li><a href="#d-siderbar">Sidebar B</a></li>
+				  <li><a href="#d-sidebar">Aside 1</a></li>
+				  <li><a href="#d-siderbar">Aside 2</a></li>
 				  <li><a href="#d-footer">Footer</a></li>
 				</ul>
 
@@ -74,7 +89,7 @@ if ($flg=="noperms")
 									placeholder="Enter the title of the site"
 									title="Enter the full title of the site here."
 									data-toggle="tooltip"
-									value="<?php echo $title; ?>"
+									value=""
 									data-placement="top"
 									class="input-block-level tooltipme2"><br>
 
@@ -89,7 +104,7 @@ if ($flg=="noperms")
 									title="Enter the description of the site here, this is VERY IMPORTANT for SEO. Do not duplicate on all pages"
 									data-toggle="tooltip"
 									data-placement="top"
-									class="input-block-level tooltipme2"><?php echo $description; ?></textarea><br>
+									class="input-block-level tooltipme2"></textarea><br>
 
 							</div>
 						  </div>
@@ -102,23 +117,23 @@ if ($flg=="noperms")
 									title="Enter list keywords of the site here, not so important now but use it anyways. Do not stuff keywords"
 									data-toggle="tooltip"
 									data-placement="top"
-									class="input-block-level tooltipme2"><?php echo $keywords; ?></textarea><br>
+									class="input-block-level tooltipme2"></textarea><br>
 
 							</div>
 						  </div>
 
 					</div>
 					<div class="tab-pane" id="d-header">
-						<textarea name="txtHeader" id="txtHeader" style="width:98%; height:300px"><?php echo $header; ?></textarea>
+						<textarea name="txtHeader" id="txtHeader" style="width:98%; height:300px"><?php echo $cms->header; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-sidebar">
-						<textarea name="txtSide" id="txtSide" style="width:98%; height:300px"><?php echo $sidebar; ?></textarea>
+						<textarea name="txtSide" id="txtSide" style="width:98%; height:300px"><?php echo $cms->sidebar; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-siderbar">
-						<textarea name="txtrSide" id="txtrSide" style="width:98%; height:300px"><?php echo $siderbar; ?></textarea>
+						<textarea name="txtrSide" id="txtrSide" style="width:98%; height:300px"><?php echo $cms->siderbar; ?></textarea>
 					</div>
 					<div class="tab-pane" id="d-footer">
-						<textarea name="txtFooter" id="txtFooter" style="width:98%; height:300px"><?php echo $footer; ?></textarea>
+						<textarea name="txtFooter" id="txtFooter" style="width:98%; height:300px"><?php echo $cms->footer; ?></textarea>
 					</div>
 				</div>
 				</div>
@@ -128,10 +143,7 @@ if ($flg=="noperms")
 	</div>
 <?php include('include/footer.php'); ?>
 <script type="text/javascript">
-	var txtHeader_loaded = true;
-	var txtFooter_loaded = true;
-	var txtSide_loaded = true;
-	var txtSider_loaded = true;
+
 	$("#top-bar li").removeClass('active');
 	$("#top-bar li:eq(0)").addClass('active');
 	$("#top-bar li:eq(0) ul li:eq(0)").addClass('active');

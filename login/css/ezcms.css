@@ -111,8 +111,27 @@ textarea, input[type="text"], input[type="password"], select {
 
 .CodeMirror {
 	height: auto;
-}	
+}
 
+.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus {
+   color: #fff;
+    cursor: default;
+    background-color: rgba(0,0,0,0.5);
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+.tab-content {
+    background: rgba(0,0,0,0.5);
+    border: thin solid;
+    border-top: 0;
+}
+.btn, .btn-group {
+	border-radius:0;
+}
 @media (max-width: 980px) {
 	#wrap .container {
 		padding-top:0;

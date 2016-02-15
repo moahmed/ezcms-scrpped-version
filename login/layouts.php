@@ -9,18 +9,16 @@
  * 
  */
  
-// **************** ezCMS CONTROLLER CLASS ****************
+// **************** ezCMS LAYOUTS CLASS ****************
 require_once ("class/layouts.class.php"); 
 
-// **************** ezCMS CONTROLLER HANDLE ****************
+// **************** ezCMS LAYOUTS HANDLE ****************
 $cms = new ezLayouts(); 
- 
+
 ?><!DOCTYPE html><html lang="en"><head>
 
 	<title>Layouts : ezCMS Admin</title>
 	<?php include('include/head.php'); ?>
-	<link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css" />
-	<link rel="stylesheet" href="codemirror/theme/liquibyte.css">
 	
 </head><body>
   
@@ -79,6 +77,19 @@ $cms = new ezLayouts();
 									<p><a id="btnsaveas" href="#" class="btn btn-large btn-info">Save Now</a></p>
 								  </div>
 								  
+								  <div class="btn-group">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										Revisions <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="#">See more ...</a></li>
+									</ul>
+								  </div>	
+								  
 								</div>
 								<?php echo $cms->deletebtn; ?>
 							</div>
@@ -95,7 +106,6 @@ $cms = new ezLayouts();
 	</div>
 
 <?php include('include/footer.php'); ?>
-
 <script src="codemirror/lib/codemirror.js"></script>
 <script src="codemirror/mode/javascript/javascript.js"></script>
 <script src="codemirror/mode/htmlmixed/htmlmixed.js"></script>

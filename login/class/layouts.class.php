@@ -37,7 +37,6 @@ class ezLayouts extends ezCMS {
 		
 		// Check if file is to be deleted
 		if (isset($_GET['delfile'])) {
-			
 			$this->delete();
 		} 		
 		
@@ -84,7 +83,7 @@ class ezLayouts extends ezCMS {
 		$this->treehtml .= '</ul>';
 	}
 	
-	// Function to Update the Controller
+	// Function to Delete the Layout
 	private function delete() {
 	
 		$filename = $_REQUEST['delfile'];
@@ -118,7 +117,7 @@ class ezLayouts extends ezCMS {
 		exit;	
 	}
 	
-	// Function to Update the Controller
+	// Function to Update the Layout
 	private function update() {
 	
 		// Check all the variables are posted

@@ -1,21 +1,13 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net & mosh.ahmed@gmail.com
  *
- * Version 2.010413 Dated 20/March/2013
- * Rev: 14-Apr-2014 (2.140413)
- * HMI Technologies Mumbai (2013-14)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
  * View: Displays the users in the site
  *
- */
  
- 
-// **************** ezCMS CLASS ****************
-require_once ("class/ezcms.class.php"); // CMS Class for database access
-$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
-
-
 
 // this function will echo the user tree
 function getUserTreeHTML($id) {
@@ -102,7 +94,7 @@ $editjs = '';
 
 
 if ($id <> 'new') {
-	/*
+
 	$qry = "SELECT * FROM `users` WHERE `id` = " . $id;
 	$rs = mysql_query($qry);
 	if (!mysql_num_rows($rs))
@@ -123,7 +115,7 @@ if ($id <> 'new') {
 	if ($arr["editcss"] == 1) $editcss= "checked";
 	if ($arr["editjs"] == 1) $editjs= "checked";
 	mysql_free_result($rs);
-	*/
+	
 } else {
 	if (!$_SESSION['edituser']) {
 		// permission denied
@@ -132,7 +124,15 @@ if ($id <> 'new') {
 	}	
 }
 
-if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
+if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = ""; 
+ 
+ */
+ 
+ // **************** ezCMS USERS CLASS ****************
+require_once ("class/users.class.php"); 
+
+// **************** ezCMS USERS HANDLE ****************
+$cms = new ezUsers();
 
 ?><!DOCTYPE html><html lang="en"><head>
 
@@ -146,23 +146,23 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 		<div class="container">
 			<div class="container-fluid">
 			  <div class="row-fluid">
-				<div class="span3 white-boxed"><?php getUserTreeHTML($id); ?></div>
+				<div class="span3 white-boxed"><?php echo $cms->treehtml; ?></div>
 				<div class="span9 white-boxed">
 					<form id="frmUser" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 					  <div class="navbar">
 							<div class="navbar-inner">
 								<input type="submit" name="Submit" class="btn btn-inverse" style="padding:5px 12px;"
-									value="<?php if ($id == 'new') echo 'Add New'; else echo 'Save Changes';?>">
+									value="<?php if ($cms->id == 'new') echo 'Add New'; else echo 'Save Changes';?>">
 								<?php
-									if ($id != 'new') echo
+									if ($cms->id != 'new') echo
 										'<a href="?id=new" class="btn btn-inverse">New User</a> ';
-									if (($id != 'new') && ($id != 1)) echo '<a href="scripts/del-user.php?delid=' . $id .
+									if (($cms->id != 'new') && ($cms->id != 1)) echo '<a href="scripts/del-user.php?delid=' . $cms->id .
 										'" onclick="return confirm(\'Confirm Delete ?\');" class="btn btn-danger">Delete</a>';
 								?>
 							</div>
 						</div>
 
-						<?php echo $msg; ?>
+						<?php echo $cms->msg; ?>
 
 						<div class="row" style="margin-left:0">
 							<div class="span4">

@@ -5,7 +5,7 @@
  * Version 4.160210
  * HMI Technologies Mumbai
  *
- * Class: ezCMS Controller Class 
+ * Class: ezCMS Settings Class 
  * 
  */
 
@@ -14,17 +14,17 @@ require_once ("ezcms.class.php"); // CMS Class for database access
 
 class ezSettings extends ezCMS {
 
-	public $content = '';
+	public $header = '';
+	public $sidebar = '';
+	public $siderbar = '';
+	public $footer = '';
 	
 	// Consturct the class
 	public function __construct () {
 	
 		// call parent constuctor
 		parent::__construct();
-		
-		// get the contents of the controller file (index.php)
-		$this->content = htmlspecialchars(file_get_contents("../index.php"));
-		
+				
 		// Update the Controller of Posted
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$this->update();
@@ -50,24 +50,6 @@ class ezSettings extends ezCMS {
 			exit;
 		}
 		
-		// Fetch the contents
-		$contents = $_POST["txtContents"];
-		
-		// Check if controller is writeable
-		if (!is_writable('../index.php')) {
-			$this->flg = 'unwriteable';
-			$this->content = htmlspecialchars($contents);
-			return;
-		}
-		
-		
-		if (file_put_contents('../index.php', $contents )) {
-			header("Location: controllers.php?flg=saved");
-			exit;
-		}
-
-		$this->flg = 'failed';
-		$this->content = htmlspecialchars($contents);
 		
 	}
 	

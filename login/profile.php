@@ -7,13 +7,6 @@
  *
  * View: Allows the user to update the password
  *
- */
- 
-// **************** ezCMS CONTROLLER CLASS ****************
-require_once ("class/profile.class.php"); 
-
-
-$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
  
 // Class to handle post data
 class cmsProfile {
@@ -92,12 +85,13 @@ class cmsProfile {
 		$this->setMsgHTML('error','Current Password Mismatch !',
 			'Your current password is incorrect.');
 
-	}
-	
-}
+ */
+ 
+ // **************** ezCMS USERS CLASS ****************
+require_once ("class/profile.class.php"); 
 
-// Create an instance of the handler
-$profile = new cmsProfile;
+// **************** ezCMS USERS HANDLE ****************
+$cms = new ezProfile();
 
 ?><!DOCTYPE html><html lang="en"><head>
 
@@ -121,7 +115,7 @@ $profile = new cmsProfile;
 					  <small>Remember to change your password often.</small>
 					</blockquote>
 
-					<?php echo $profile->msg; ?>
+					<?php echo $cms->msg; ?>
 
 					<form id="frmPass" action="profile.php" method="post" enctype="multipart/form-data">
 
@@ -159,5 +153,6 @@ $profile = new cmsProfile;
 <?php include('include/footer.php'); ?>
 <script type="text/javascript">
 	$("#top-bar li").removeClass('active');
+	$("#top-bar li:eq(11)").addClass('active');
 </script>
 </body></html>

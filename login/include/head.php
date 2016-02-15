@@ -22,6 +22,7 @@
 <link href="codemirror/lib/codemirror.css" rel="stylesheet">
 <link rel="stylesheet" href="codemirror/addon/fold/foldgutter.css" />
 <link rel="stylesheet" href="codemirror/theme/liquibyte.css">
+<link rel="stylesheet" href="codemirror/addon/hint/show-hint.css">
 <link href="css/ezcms.css" rel="stylesheet">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>

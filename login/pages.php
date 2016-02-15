@@ -1,20 +1,13 @@
 <?php
 /*
- * Code written by mo.ahmed@hmi-tech.net
+ * ezCMS Code written by mo.ahmed@hmi-tech.net & mosh.ahmed@gmail.com
  *
- * Version 2.010413 Dated 20/March/2013
- * Rev: 14-Apr-2014 (2.140413)
- * HMI Technologies Mumbai (2013-14)
+ * Version 4.160210
+ * HMI Technologies Mumbai
  *
- * View: Displays the web pages in the site
+ * View: Displays the web pages in the CMS
  *
- */
-// **************** ezCMS CLASS ****************
-require_once ("class/ezcms.class.php"); // CMS Class for database access
-$cms = new ezCMS(); // create new instance of CMS Class with loginRequired = true
 
-
-require_once("include/pages.functions.php");
 
 if (isset( $_REQUEST["id"])) $id = $_REQUEST["id"]; else $id = 1;
 $usefooter      = '';
@@ -166,7 +159,16 @@ if (isset($_REQUEST['Submit'])) {
 } else {
 	if (!$_SESSION['editpage']) {header("Location: pages.php?flg=noperms");exit;}	// permission denied
 }
-if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
+if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = ""; 
+ 
+ 
+ */
+
+// **************** ezCMS PAGES CLASS ****************
+require_once ("class/pages.class.php"); 
+
+// **************** ezCMS PAGES HANDLE ****************
+$cms = new ezPages(); 
 
 ?><!DOCTYPE html><html lang="en"><head>
 
@@ -185,7 +187,7 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 			  <div class="row-fluid">
 				<div class="span3 white-boxed">
 					<p><input type="text" id="txtsearch" class="input-block-level" placeholder="Search here ..."></p>
-					<?php $dropdownOptionsHTML = getTreeHTML(0, $id, $parentid , str_replace('.html', '' ,$url)); ?>
+					<?php echo $cms->treehtml; ?>
 				</div>
 				<div class="span9 white-boxed">
 
@@ -193,14 +195,14 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 					<div class="navbar">
 						<div class="navbar-inner">
 							<input type="submit" name="Submit" class="btn btn-inverse"
-								value="<?php if ($id == 'new') echo 'Add Page'; else echo 'Save Changes';?>">
-							  <?php if ($id != 'new') { ?>
+								value="<?php if ($cms->id == 'new') echo 'Add Page'; else echo 'Save Changes';?>">
+							  <?php if ($cms->id != 'new') { ?>
 								<a href="<?php echo $url; ?>" target="_blank"
 									<?php if ($published!='checked') echo 'onclick="return confirm(\'The page is Not published, its only visible to you.\');"'; ?>
 									class="btn btn-inverse">View</a>
 								<a href="pages.php?id=new" class="btn btn-inverse">New</a>
 								<a href="scripts/copy-page.php?copyid=<?php echo $id; ?>" class="btn btn-inverse">Copy</a>
-								<?php if ($id != 1 && $id != 2) echo '<a href="scripts/del-page.php?delid='.$id.
+								<?php if ($cms->id != 1 && $cms->id != 2) echo '<a href="scripts/del-page.php?delid='.$cms->id.
 										'" onclick="return confirm(\'Confirm Delete ?\');" class="btn btn-danger">Delete</a>'; ?>
 								<div class="btn-group">
 									<button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></button>
@@ -239,8 +241,8 @@ if (isset($_GET["flg"])) $msg = getErrorMsg($_GET["flg"]); else $msg = "";
 					  <li class="active"><a href="#d-main">Main</a></li>
 					  <li><a href="#d-content">Content</a></li>
 					  <li><a href="#d-header">Header</a></li>
-					  <li><a href="#d-sidebar">Sidebar A</a></li>
-					  <li><a href="#d-siderbar">Sidebar B</a></li>
+					  <li><a href="#d-sidebar">Aside 1</a></li>
+					  <li><a href="#d-siderbar">Aside 2</a></li>
 					  <li><a href="#d-footer">Footer</a></li>
 					  <li><a href="#d-head">Head</a></li>
 					</ul>

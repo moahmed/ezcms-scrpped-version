@@ -5,7 +5,7 @@
  * Version 4.160210
  * HMI Technologies Mumbai
  *
- * Class: ezCMS Controller Class 
+ * Class: ezCMS Profile Class 
  * 
  */
 
@@ -21,10 +21,7 @@ class ezProfile extends ezCMS {
 	
 		// call parent constuctor
 		parent::__construct();
-		
-		// get the contents of the controller file (index.php)
-		$this->content = htmlspecialchars(file_get_contents("../index.php"));
-		
+				
 		// Update the Controller of Posted
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$this->update();
@@ -49,25 +46,6 @@ class ezProfile extends ezCMS {
 			header("Location: controllers.php?flg=noperms");
 			exit;
 		}
-		
-		// Fetch the contents
-		$contents = $_POST["txtContents"];
-		
-		// Check if controller is writeable
-		if (!is_writable('../index.php')) {
-			$this->flg = 'unwriteable';
-			$this->content = htmlspecialchars($contents);
-			return;
-		}
-		
-		
-		if (file_put_contents('../index.php', $contents )) {
-			header("Location: controllers.php?flg=saved");
-			exit;
-		}
-
-		$this->flg = 'failed';
-		$this->content = htmlspecialchars($contents);
 		
 	}
 	
