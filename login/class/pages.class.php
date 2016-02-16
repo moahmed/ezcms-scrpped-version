@@ -14,9 +14,13 @@ require_once ("ezcms.class.php"); // CMS Class for database access
 
 class ezPages extends ezCMS {
 
-	public $id = '';
+	public $id = 1;
 	
-	public $treehtml = '';	
+	public $treehtml = '';
+	
+	public $addNewBtn;
+	
+	public $page;	
 	
 	// Consturct the class
 	public function __construct () {
@@ -29,8 +33,51 @@ class ezPages extends ezCMS {
 			$this->update();
 		}
 		
+		// Check if file to display is set
+		if (isset($_GET['id'])) {
+			$this->id = $_GET['id'];
+		} 
+		
+		if ($this->id <> 'new' ) {
+			$this->page = $this->query('SELECT * FROM `pages` WHERE `id` = '.$this->id.' LIMIT 1')
+				->fetch(PDO::FETCH_ASSOC); // get the selected user details
+
+			$this->setOptions('published', 
+				'Page is published and visible to all.', 
+				'Unpublished page only visible when logged in.');
+
+			
+		}
+		
+		//Build the HTML Treeview
+		$this->buildTree();
+		
 		// Get the Message to display if any
 		$this->getMessage();
+
+	}
+	
+	protected function setOptions($itm, $msgOn, $mgsOff) {
+		if ($this->page[$itm]) {
+			$this->page[$itm.'Check'] = 'checked';
+			$this->page[$itm.'Msg'] = '<span class="label label-info">'.$msgOn.'</span>';
+		} else {
+			$this->page[$itm.'Check'] = '';
+			$this->page[$itm.'Msg'] = '<span class="label label-important">'.$mgsOff.'</span>';
+		}
+	}		
+	
+	// Function to Build Treeview HTML
+	private function buildTree() {
+		$this->treehtml = '<ul id="left-tree">';
+		foreach ($this->query('select `id` , `title` , `url`, `published`, `description` from  `pages` where `parentid` = 1 order by place;') as $entry) {
+			$myclass = ($entry["id"] == $this->id) ? 'label label-info' : '';
+			$this->treehtml .= '<li><i class="icon-user icon-white"></i> <a href="pages.php?id='.
+				$entry['id'].'" class="'.$myclass.'">'.$entry["title"].'</a></li>';
+			
+			
+		}
+		$this->treehtml .= '</ul>';		
 
 	}
 	

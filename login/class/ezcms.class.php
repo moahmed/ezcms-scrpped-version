@@ -54,7 +54,7 @@ class ezCMS extends db {
 		}
 		
 	}
-
+	
 	// this function will set the formatted html to display
 	public function setMsgHTML ($class, $caption, $subcaption ) {
 		$this->msg = '<div class="alert alert-'.$class.'">

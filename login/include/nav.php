@@ -45,7 +45,7 @@
 		  
 		  <li class="active"><a href="pages.php"><i class="icon-file"></i> Pages</a></li>
 		  <li><a href="users.php"><i class="icon-user"></i> Users</a></li>
-		  <li><a href="#"><i class="icon-refresh"></i> GIT Hook</a></li>
+		  <li><a href="#"><i class="icon-refresh"></i> GIT</a></li>
 		  
 		</ul>
 		

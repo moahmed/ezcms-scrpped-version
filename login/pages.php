@@ -197,11 +197,11 @@ $cms = new ezPages();
 							<input type="submit" name="Submit" class="btn btn-inverse"
 								value="<?php if ($cms->id == 'new') echo 'Add Page'; else echo 'Save Changes';?>">
 							  <?php if ($cms->id != 'new') { ?>
-								<a href="<?php echo $url; ?>" target="_blank"
-									<?php if ($published!='checked') echo 'onclick="return confirm(\'The page is Not published, its only visible to you.\');"'; ?>
+								<a href="<?php echo $cms->page['url']; ?>" target="_blank"
+									<?php if ($cms->page['published']!='checked') echo 'onclick="return confirm(\'The page is Not published, its only visible to you.\');"'; ?>
 									class="btn btn-inverse">View</a>
 								<a href="pages.php?id=new" class="btn btn-inverse">New</a>
-								<a href="scripts/copy-page.php?copyid=<?php echo $id; ?>" class="btn btn-inverse">Copy</a>
+								<a href="scripts/copy-page.php?copyid=<?php echo $cms->id; ?>" class="btn btn-inverse">Copy</a>
 								<?php if ($cms->id != 1 && $cms->id != 2) echo '<a href="scripts/del-page.php?delid='.$cms->id.
 										'" onclick="return confirm(\'Confirm Delete ?\');" class="btn btn-danger">Delete</a>'; ?>
 								<div class="btn-group">
@@ -210,23 +210,23 @@ $cms = new ezPages();
 									  <li class="nav-header">Validate</li>
 									  <li><a class="lframe" target="_blank" title="Validate the Page HTML" href=
 									  	"http://validator.w3.org/check?uri=http%3A%2F%2F<?php
-										echo $_SERVER['HTTP_HOST'] . $url;
+										echo $_SERVER['HTTP_HOST'] . $cms->page['url'];
 										?>&charset=%28detect+automatically%29&fbc=1&doctype=Inline&fbd=1&group=0&verbose=1">
 										<i class="icon-chevron-right"></i> HTML W3C</a></li>
 									  <li><a class="lframe" target="_blank" title="Validate the Page CSS" href=
 									  	"http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2F<?php
-										echo $_SERVER['HTTP_HOST'] . $url;
+										echo $_SERVER['HTTP_HOST'] . $cms->page['url'];
 										?>&profile=css21&usermedium=all&warning=1&vextwarning=&lang=en">
 										<i class="icon-chevron-right"></i> CSS W3C</a></li>
 									  <li class="divider"></li>
 									  <li class="nav-header">Check</li>
 									  <li><a class="lframe" target="_blank" title="Check the Page for broken links" href=
 									  	"http://validator.w3.org/checklink?uri=http%3A%2F%2F<?php
-										echo $_SERVER['HTTP_HOST'] . $url; ?>&hide_type=all&depth=1&check=Check">
+										echo $_SERVER['HTTP_HOST'] . $cms->page['url']; ?>&hide_type=all&depth=1&check=Check">
 										<i class="icon-chevron-right"></i> Broken Links</a></li>
  									  <li><a class="lframe" target="_blank" title="Check the Page keyword density" href=
 									  	"http://www.webconfs.com/keyword-density-checker.php?url=http%3A%2F%2F<?php
-										echo $_SERVER['HTTP_HOST'] . $url; ?>">
+										echo $_SERVER['HTTP_HOST'] . $cms->page['url']; ?>">
 										<i class="icon-chevron-right"></i> Keyword Density</a></li>
 									</ul>
 								</div>
@@ -234,7 +234,7 @@ $cms = new ezPages();
 						</div>
 					</div>
 
-					<?php echo $msg; ?>
+					<?php echo $cms->msg; ?>
 
 				    <div class="tabbable tabs-top">
 					<ul class="nav nav-tabs" id="myTab">
@@ -259,11 +259,11 @@ $cms = new ezPages();
 										placeholder="Enter the title of the page"
 										title="Enter the full title of the page here."
 										data-toggle="tooltip"
-										value="<?php echo $title; ?>"
+										value="<?php echo $cms->page['title']; ?>"
 										data-placement="top"
 										class="input-block-level tooltipme2 countme2"><br>
-										<label class="checkbox" <?php if ($id == 1 || $id == 2) echo 'style="display:none"';?>>
-										  <input name="ckPublished" type="checkbox" id="ckPublished" value="checkbox" <?php echo $published; ?>>
+										<label class="checkbox" <?php if ($cms->id == 1 || $cms->id == 2) echo 'style="display:none"';?>>
+										  <input name="ckPublished" type="checkbox" id="ckPublished" value="checkbox" <?php echo $cms->page['publishedCheck']; ?>>
 										  Published on site
 										</label>
 								</div>
@@ -277,13 +277,10 @@ $cms = new ezPages();
 										placeholder="Enter the name of the page"
 										title="Enter the full name of the page here."
 										data-toggle="tooltip"
-										value="<?php echo $name; ?>"
+										value="<?php echo $cms->page['pagename']; ?>"
 										data-placement="top"
 										class="input-block-level tooltipme2 countme2"><br>
-									<?php if ($published!='checked')
-												echo '<span class="label label-important">Unpublished page only visible when logged in.</span>';
-											else
-												echo '<span class="label label-info">Page is published and visible to all.</span>'; ?>
+									<?php echo $cms->page['publishedMsg']; ?>
 
 								</div>
 							  </div>
@@ -345,7 +342,7 @@ $cms = new ezPages();
 										title="Enter the description of the page here, this is VERY IMPORTANT for SEO. Do not duplicate on all pages"
 										data-toggle="tooltip"
 										data-placement="top"
-										class="input-block-level tooltipme2 countme2"><?php echo $description; ?></textarea>
+										class="input-block-level tooltipme2 countme2"><?php echo $cms->page['description']; ?></textarea>
 								</div>
 							  </div>
 							</div>
@@ -358,7 +355,7 @@ $cms = new ezPages();
 										title="Enter list keywords of the page here, not so important now but use it anyways. Do not stuff keywords"
 										data-toggle="tooltip"
 										data-placement="top"
-										class="input-block-level tooltipme2 countme2"><?php echo $keywords; ?></textarea>
+										class="input-block-level tooltipme2 countme2"><?php echo $cms->page['keywords']; ?></textarea>
 								</div>
 							  </div>
 							</div>
@@ -367,9 +364,9 @@ $cms = new ezPages();
 
 					  <div class="tab-pane" id="d-content">
 					    <input border="0" class="input-block-level" name="txtURL" onFocus="this.select();"
-							style="cursor: pointer;" onClick="this.select();"  type="text" value="<?php echo $url; ?>" readonly/>
+							style="cursor: pointer;" onClick="this.select();"  type="text" value="<?php echo $cms->page['url']; ?>" readonly/>
 						<textarea name="txtMain" rows="30" id="txtMain" style="height: 420px; width:100%"
-							class="input-block-level"><?php echo $maincontent; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['maincontent']; ?></textarea>
 					  </div>
 
 					  <div class="tab-pane" id="d-header">
@@ -387,33 +384,33 @@ $cms = new ezPages();
 											echo '<span class="label label-info">Page will display the default header.</span>'; ?>
 							</div>
 							<div class="span4" style="text-align:right ">
-								<a href="scripts/copy-block.php?headcopyid=<?php echo $id; ?>" class="btn btn-mini btn-primary">Copy Default Header</a>
+								<a href="scripts/copy-block.php?headcopyid=<?php echo $cms->id; ?>" class="btn btn-mini btn-primary">Copy Default Header</a>
 							</div>
 						</div>
 						<textarea name="txtHeader" rows="30" id="txtHeader" style="height: 420px; width:100%"
-							class="input-block-level"><?php echo $header; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['headercontent']; ?></textarea>
 					  </div>
 
 					  <div class="tab-pane" id="d-sidebar">
 						<div class="row" style="margin-left:0">
 							<div class="span4">
 								<label class="checkbox">
-								  <input name="ckside" type="checkbox" id="ckside" value="checkbox" <?php echo $useside; ?>>
-								  Enable custom sidebar A
+								  <input name="ckside" type="checkbox" id="ckside" value="checkbox" <?php echo $cms->page['useside']; ?>>
+								  Enable custom Aside 1
 								</label>
 							</div>
 							<div class="span4" style="text-align:center">
-								<?php if ($useside=='checked')
+								<?php if ($cms->page['useside']=='checked')
 											echo '<span class="label label-important">Page will display custom sidebar A below.</span>';
 										else
 											echo '<span class="label label-info">Page will display the default sidebar A.</span>'; ?>
 							</div>
 							<div class="span4" style="text-align:right ">
-								<a href="scripts/copy-block.php?sidecopyid=<?php echo $id; ?>" class="btn btn-mini btn-primary">Copy Default Sidebar A</a>
+								<a href="scripts/copy-block.php?sidecopyid=<?php echo $cms->id; ?>" class="btn btn-mini btn-primary">Copy Default Sidebar A</a>
 							</div>
 						</div>
 						<textarea name="txtSide" rows="30" id="txtSide" style="height: 420px; width:100%"
-							class="input-block-level"><?php echo $sidebar; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['sidecontent']; ?></textarea>
 					  </div>
 
 					  <div class="tab-pane" id="d-siderbar">
@@ -421,7 +418,7 @@ $cms = new ezPages();
 							<div class="span4">
 								<label class="checkbox">
 								  <input name="cksider" type="checkbox" id="cksider" value="checkbox" <?php echo $usesider; ?>>
-								  Enable custom sidebar B
+								  Enable custom Aside 2
 								</label>
 							</div>
 							<div class="span4" style="text-align:center">
@@ -431,33 +428,33 @@ $cms = new ezPages();
 											echo '<span class="label label-info">Page will display the default sidebar B.</span>'; ?>
 							</div>
 							<div class="span4" style="text-align:right ">
-								<a href="scripts/copy-block.php?sidercopyid=<?php echo $id; ?>" class="btn btn-mini btn-primary">Copy Default Sidebar B</a>
+								<a href="scripts/copy-block.php?sidercopyid=<?php echo $cms->id; ?>" class="btn btn-mini btn-primary">Copy Default Sidebar B</a>
 							</div>
 						</div>
 						<textarea name="txtrSide" rows="30" id="txtrSide" style="height: 420px; width:100%"
-							class="input-block-level"><?php echo $siderbar; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['sidercontent']; ?></textarea>
 					  </div>
 
 					  <div class="tab-pane" id="d-footer">
 						<div class="row" style="margin-left:0">
 							<div class="span4">
 								<label class="checkbox">
-								  <input name="ckFooter" type="checkbox" id="ckFooter" value="checkbox" <?php echo $usefooter; ?>>
+								  <input name="ckFooter" type="checkbox" id="ckFooter" value="checkbox" <?php echo $cms->page['usefooter']; ?>>
 								  Enable custom footer
 								</label>
 							</div>
 							<div class="span4" style="text-align:center">
-								<?php if ($usefooter=='checked')
+								<?php if ($cms->page['usefooter']=='checked')
 											echo '<span class="label label-important">Page will display custom footer below.</span>';
 										else
 											echo '<span class="label label-info">Page will display the default footer.</span>'; ?>
 							</div>
 							<div class="span4" style="text-align:right ">
-								<a href="scripts/copy-block.php?footcopyid=<?php echo $id; ?>" class="btn btn-mini btn-primary">Copy Default Footer</a>
+								<a href="scripts/copy-block.php?footcopyid=<?php echo $cms->id; ?>" class="btn btn-mini btn-primary">Copy Default Footer</a>
 							</div>
 						</div>
 						<textarea name="txtFooter" id="txtFooter" rows="30" style="height: 420px; width:100%"
-							class="input-block-level"><?php echo $footer; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['footercontent']; ?></textarea>
 					  </div>
 
 					  <div class="tab-pane" id="d-head">
@@ -468,7 +465,7 @@ $cms = new ezPages();
 						</blockquote>
 
 						<textarea name="txtHead" rows="30" id="txtHead" style="height: 320px; width:100%"
-							class="input-block-level"><?php echo $head; ?></textarea>
+							class="input-block-level"><?php echo $cms->page['head']; ?></textarea>
 					  </div>
 
 					  </div>
