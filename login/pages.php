@@ -293,9 +293,8 @@ $cms = new ezPages();
 							  <div class="control-group">
 								<label class="control-label" for="inputName">Parent Page</label>
 								<div class="controls">
-								  <?php if ($id == 1 || $id == 2) echo
-								  			'<div class="alert alert-info" style="margin: 0 0 3px;padding: 5px 10px;"><strong>'.
-												'Site Root</strong></div>';
+								  <?php if ($cms->id == 1 || $cms->id == 2) echo
+								  			'<div class="alert alert-info"><strong>Site Root</strong></div>';
 										else echo
 											'<select name="slGroup" id="slGroup" class="input-block-level">' .
 													$dropdownOptionsHTML . '</select>'; ?>
@@ -373,12 +372,12 @@ $cms = new ezPages();
 						<div class="row" style="margin-left:0">
 							<div class="span4">
 								<label class="checkbox">
-								  <input name="ckHeader" type="checkbox" id="ckHeader" value="checkbox" <?php echo $useheader; ?>>
+								  <input name="ckHeader" type="checkbox" id="ckHeader" value="checkbox" <?php echo $cms->page{'useheader'}; ?>>
 								  Enable custom header
 								</label>
 							</div>
 							<div class="span4" style="text-align:center">
-								<?php if ($useheader=='checked')
+								<?php if ($cms->page{'useheader'}=='checked')
 											echo '<span class="label label-important">Page will display custom header below.</span>';
 										else
 											echo '<span class="label label-info">Page will display the default header.</span>'; ?>

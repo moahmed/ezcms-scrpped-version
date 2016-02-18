@@ -91,7 +91,7 @@ class ezPages extends ezCMS {
 		}
 
 		// Check permissions
-		if (!$this->usr['editcont']) {
+		if (!$this->usr['editpages']) {
 			header("Location: controllers.php?flg=noperms");
 			exit;
 		}

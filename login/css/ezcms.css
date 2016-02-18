@@ -21,7 +21,7 @@ a:hover { color: #fff; }
 }
 #footer { height: 30px; background: #000; padding-top: 10px;}
 .tooltip-inner {font-size:18px;}
-.label, .badge {white-space:normal;}
+.label, .badge {white-space:normal; border-radius:0; padding:5px; text-shadow:none; font-weight:normal; }
 #wrap .container {
 	padding-top:60px;
 	margin: 0 auto; 
@@ -128,6 +128,7 @@ textarea, input[type="text"], input[type="password"], select {
     background: rgba(0,0,0,0.5);
     border: thin solid;
     border-top: 0;
+	padding: 10px;
 }
 .btn, .btn-group {
 	border-radius:0;

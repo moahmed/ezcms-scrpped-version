@@ -18,7 +18,7 @@ class ezUsers extends ezCMS {
 	
 	public $treehtml = '';
 	
-	public $addNewBtn;
+	public $addNewBtn = 'Save Changes';
 	
 	public $thisUser;
 	
@@ -53,7 +53,11 @@ class ezUsers extends ezCMS {
 			$this->setOptions('editcss', 'Stylesheet management available.', 'Stylesheet management blocked.');
 			$this->setOptions('editjs', 'Javascript management available.', 'Javascript management blocked.');
 			
+		} else {
+			$this->addNewBtn ='Add New';
 		}
+		
+		
 
 		//Build the HTML Treeview
 		$this->buildTree();
@@ -78,29 +82,17 @@ class ezUsers extends ezCMS {
 		$this->treehtml = '<ul id="left-tree">';
 		foreach ($this->query("SELECT `id`, `username`, `active` FROM `users` ORDER BY id;") as $entry) {
 			$myclass = ($entry["id"] == $this->id) ? 'label label-info' : '';
-			$this->treehtml .= '<li><i class="icon-user icon-white"></i> <a href="users.php?id='.
-				$entry['id'].'" class="'.$myclass.'">'.$entry["username"].'</a></li>';
-			
+			if ($entry["id"] == 1) {
+				$this->treehtml .= '<li class="open"><i class="icon-user icon-white"></i> <a href="users.php?id='.
+					$entry['id'].'" class="'.$myclass.'">'.$entry["username"].'</a><ul>';
+			} else {
+				$active = ($entry["active"] != 1) ? ' <i class="icon-ban-circle icon-white" title="User is not active, cannot login"></i>' : '';
+				$this->treehtml .= '<li><i class="icon-user icon-white"></i> <a href="users.php?id='.
+					$entry['id'].'" class="'.$myclass.'">'.$entry["username"].$active.'</a></li>';
+			}
 			
 		}
-		$this->treehtml .= '</ul>';		
-		
-/*    echo '<ul id="left-tree">';
-	if ($id==1) $myclass = 'class="label label-info"'; else $myclass='';
-	echo '<li class="open"><i class="icon-globe"></i> <a '.$myclass.' href="users.php?id=1">Webmaster</a>';
-		echo '<ul>';
-		while ($row = mysql_fetch_assoc($rs)) {
-			echo '<li><i class="icon-user"></i> '  ;
-			if ( $row["id"] == $id)  
-				echo '<a class="label label-info" href="users.php?id=' . $row["id"] . '"> ' . $row["username"];
-			else
-				echo '<a href="users.php?id=' . $row["id"] . '"> ' . $row["username"];
-				if ($row['active']!=1) echo ' <i class="icon-ban-circle" title="User is not active, cannot login"></i> ';
-			echo '</a></li>';
-		}
-		echo '</ul>';
-	echo '</li></ul>';
-*/
+		$this->treehtml .= '</ul></li></ul>';		
 	}
 	
 

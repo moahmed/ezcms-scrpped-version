@@ -212,7 +212,7 @@ $cms = new ezUsers();
 								<br><br>
 								<label class="checkbox">
 									<input name="ckeditcontroller" type="checkbox" id="ckeditcontroller" value="checkbox" <?php echo $cms->thisUser['editcontCheck']; ?>>
-									Manage Controller</label><?php echo $cms->thisUser['editcontMsg']; ?>
+									Manage Router</label><?php echo $cms->thisUser['editcontMsg']; ?>
 									
 								<hr>
 
