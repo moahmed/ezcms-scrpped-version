@@ -114,7 +114,7 @@ $cms = new ezUsers();
 
 ?><!DOCTYPE html><html lang="en"><head>
 
-	<title>Users &middot; ezCMS Admin</title>
+	<title>Users : ezCMS Admin</title>
 	<?php include('include/head.php'); ?>
 
 </head><body>
@@ -129,14 +129,7 @@ $cms = new ezUsers();
 					<form id="frmUser" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 					  <div class="navbar">
 							<div class="navbar-inner">
-								<input type="submit" name="Submit" class="btn btn-inverse" style="padding:5px 12px;"
-									value="<?php echo $cms->addNewBtn; ?>">
-								<?php
-									if ($cms->id != 'new') echo
-										'<a href="?id=new" class="btn btn-inverse">New User</a> ';
-									if (($cms->id != 'new') && ($cms->id != 1)) echo '<a href="scripts/del-user.php?delid=' . $cms->id .
-										'" onclick="return confirm(\'Confirm Delete ?\');" class="btn btn-danger">Delete</a>';
-								?>
+							  <?php echo $cms->barBtns; ?>
 							</div>
 						</div>
 
@@ -166,17 +159,18 @@ $cms = new ezUsers();
 							<div class="span4">
 								<label for="txtpsswd">Password</label>
 								<input type="text" id="txtpsswd" name="txtpsswd"
-									placeholder="<?php if ($cms->id=='new') echo 'Enter the password'; else echo 'Leave blank to keep unchanged';?>"
-									title="<?php if ($cms->id=='new') echo 'Enter the password here'; else echo 'Enter a new password or leave blank to keep unchanged';?>"
+									placeholder="<?php echo ($cms->id=='new') ? 'Enter the password' : 'Leave blank to keep unchanged' ?>"
+									title="<?php echo ($cms->id=='new') ? 'Enter the password here' : 'Enter a new password or leave blank to keep unchanged' ?>"
 									data-toggle="tooltip"
 									data-placement="top"
 									class="input-block-level tooltipme2">
 							</div>
 						</div>
+						
 						<h4 style="margin:20px 0; padding:10px; background:rgba(0,0,0,0.5);">
 							User privileges </h4>
 
-						<div class="row" style="margin-left:0">
+						<div class="row">
 							<div class="span4">
 								<label class="checkbox">
 									<input name="ckactive" type="checkbox" id="ckactive"
@@ -215,7 +209,6 @@ $cms = new ezUsers();
 									Manage Router</label><?php echo $cms->thisUser['editcontMsg']; ?>
 									
 								<hr>
-
 							</div>
 							<div class="span4">
 								<label class="checkbox">
@@ -234,7 +227,7 @@ $cms = new ezUsers();
 
 								<hr>
 							</div>
-						</div>
+						</div><!-- / row -->
 				    </form>
 				</div>
 			  </div>

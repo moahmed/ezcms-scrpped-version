@@ -32,6 +32,7 @@ div.white-boxed {
 	padding: 10px;
 	margin-bottom: 10px;
 }
+div.row{margin-left:0}
 .form-signin {
 	max-width: 300px;
 	padding: 19px 29px 29px;

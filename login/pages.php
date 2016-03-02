@@ -250,7 +250,7 @@ $cms = new ezPages();
 					<div class="tab-content">
 					  <div class="tab-pane active" id="d-main">
 
-						<div class="row" style="margin-left:0">
+						<div class="row">
 							<div class="span6">
 							  <div class="control-group">
 								<label class="control-label" for="inputTitle">Title Tag</label>

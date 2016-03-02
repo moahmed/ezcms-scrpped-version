@@ -14,8 +14,7 @@ require_once ("../config.php"); // PDO Class for database access
 
 // Class to handle post data
 class ezCMS extends db {
-
-	
+ 
 	public $flg = ''; // Set the error message flag to none
 	public $msg = ''; // Message to disaply if any
 	public $usr; // Logged in user record
@@ -55,12 +54,46 @@ class ezCMS extends db {
 		
 	}
 	
-	// this function will set the formatted html to display
-	public function setMsgHTML ($class, $caption, $subcaption ) {
-		$this->msg = '<div class="alert alert-'.$class.'">
-			<button type="button" class="close" data-dismiss="alert">x</button>
-			<strong>'.$caption.'</strong><br>'.$subcaption.'</div>';
+	public function add($table, $data) {	
+		$stmt = $this->prepare("INSERT INTO $table (`".
+			implode("`,`", array_keys($data))."`) VALUES (".
+			implode(',', array_fill(0, count($data), '?')).")");
+		if ($stmt->execute(array_values($data))) {
+			$newid = $this->lastInsertId();			
+			$this->query("OPTIMIZE TABLE $table");
+			return $newid;
+		} 
+		return false;
 	}
+
+	public function edit($table, $id, $data) {
+		$stmt = $this->prepare("UPDATE $table SET ".$this->arrayToPDOstr($data)." WHERE id = ? ");
+		$data[] = $id;
+		if ($stmt->execute(array_values($data))) {
+			$this->query("OPTIMIZE TABLE $table");
+			return true;
+		} 
+		return false;
+	}
+	
+	protected  function fetchPOSTData($f) { 
+		$d = array(); 
+		foreach($f as $k) {
+			if (isset($_POST[$k])) {
+				$d[$k] = trim($_POST[$k]); 
+			} else {
+				header('HTTP/1.1 400 BAD REQUEST');
+				die('BAD REQUEST');
+			}
+		}
+		return $d; 
+	}
+	
+	private function arrayToPDOstr($a) { 
+		$t = array(); 
+		foreach (array_keys($a) as $n) $t[] = "`$n` = ?"; 
+		return implode(', ', $t); 
+	}	
 
 }
 ?>
