@@ -138,7 +138,7 @@ $cms = new ezUsers();
 						<div class="row" style="margin-left:0">
 							<div class="span4">
 								<label for="inputName">User Name</label>
-								<input type="text" id="txtusername" name="txtusername"
+								<input type="text" name="username"
 									placeholder="Enter the full name"
 									title="Enter the full name of the user here."
 									data-toggle="tooltip"
@@ -148,7 +148,7 @@ $cms = new ezUsers();
 							</div>
 							<div class="span4">
 								<label for="inputEmail">Email Address</label>
-								<input type="text" id="txtemail" name="txtemail"
+								<input type="text" name="email"
 									placeholder="Enter the full email address"
 									title="Enter the full email address of the user here."
 									data-toggle="tooltip"
@@ -158,7 +158,7 @@ $cms = new ezUsers();
 							</div>
 							<div class="span4">
 								<label for="txtpsswd">Password</label>
-								<input type="text" id="txtpsswd" name="txtpsswd"
+								<input type="text" name="psswd"
 									placeholder="<?php echo ($cms->id=='new') ? 'Enter the password' : 'Leave blank to keep unchanged' ?>"
 									title="<?php echo ($cms->id=='new') ? 'Enter the password here' : 'Enter a new password or leave blank to keep unchanged' ?>"
 									data-toggle="tooltip"

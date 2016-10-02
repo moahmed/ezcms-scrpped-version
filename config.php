@@ -13,7 +13,7 @@ class db extends PDO {
 	public function __construct() {
 	
 		/**  MySQL database name */
-		$DB_NAME = 'ezSite_db';
+		$DB_NAME = 'ezcms_db';
 		
 		/** MySQL database username */
 		$DB_USER = 'root';

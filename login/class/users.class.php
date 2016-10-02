@@ -72,8 +72,6 @@ class ezUsers extends ezCMS {
 
 		}
 
-		
-
 		//Build the HTML Treeview
 		$this->buildTree();
 		
@@ -112,58 +110,69 @@ class ezUsers extends ezCMS {
 	private function delete() {
 	
 		// Check permissions
-		if (!$this->usr['editusers']) {
+		if (!$this->usr['edituser']) {
 			header("Location: users.php?flg=noperms");
 			exit;
 		}
 		
-		if (isset($_REQUEST['delid'])) $id = $_REQUEST['delid']; else die('xx'); 
-		// check user rights here
-		if (($id==1) || ($id==2)) {header("Location: ../users.php");exit;}	// cannot delete home page
+		$id = $_GET['delid']; 
+		// cannot delete home page
+		if (($id==1) || ($id==2)) {header("Location: ../users.php");exit;}	
 		if (mysql_query("delete from `users` where `id`=".$id)) 
 			header("Location: ../users.php?&flg=deleted");	// updated		
 		else header("Location: ../users.php?id=".$id."&flg=delfailed");	// failed		
 		exit;
 	}
 	
-
 	// Function to Update the Controller
 	private function update() {
 	
 		// Check permissions
-		if (!$this->usr['editusers']) {
+		if (!$this->usr['edituser']) {
+			die('hi');
 			header("Location: users.php?flg=noperms");
 			exit;
 		}
-	
-	
-		// Check all the variables are posted
-		if ( (!isset($_POST['Submit'])) || (!isset($_POST['txtContents'])) ) {
-			header('HTTP/1.1 400 BAD REQUEST');
-			die('Invalid Request');
-		}
+		
+		// array to hold the data
+		$data = array();
+		
+		// get the required post varables 
+		$this->fetchPOSTData(array(
+			'username',
+			'psswd', 
+			'email'), $data);
+			
+		// get the required post checkboxes 
+		$this->fetchPOSTCheck( array(
+			'active',
+			'editpage',
+			'delpage',
+			'edituser',
+			'deluser',
+			'editsettings',
+			'editcont',
+			'editlayout',
+			'editcss',
+			'editjs'), $data);
 
+		$this->id = $_GET['id'];
 		
-		if ($id == 'new') {
+		if ($this->id == 'new') {
 			// add new
-			if ($this->add( 'users' ,
-				array ('username' => '', )
-				)) {
-			
-			
+			$newID = $this->add( 'users' , $data);
+			if ($newID) {
+				header("Location: ?id=".$newID."&flg=added");	// added
+				exit; 
 			} 
-		
 		} else {
 			// update
-			if ($this->edit( 'users' , $this->id , 
-				array ('username' => '', )
-				)) {
-			
-			
-			} 			
-		
+			if ($this->edit( 'users' , $this->id , $data )) {
+				header("Location: ?id=".$this->id."&flg=added");	// added
+				exit; 
+			}		
 		}
-		
+		$this->flg = 'failed';
 	}
 	
 	// Function to Set the Display Message

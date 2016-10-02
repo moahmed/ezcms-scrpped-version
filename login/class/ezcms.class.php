@@ -54,7 +54,10 @@ class ezCMS extends db {
 		
 	}
 	
-	public function add($table, $data) {	
+	public function add($table, $data) {
+		die("INSERT INTO $table (`".
+			implode("`,`", array_keys($data))."`) VALUES (".
+			implode(',', array_fill(0, count($data), '?')).")");
 		$stmt = $this->prepare("INSERT INTO $table (`".
 			implode("`,`", array_keys($data))."`) VALUES (".
 			implode(',', array_fill(0, count($data), '?')).")");
@@ -67,6 +70,10 @@ class ezCMS extends db {
 	}
 
 	public function edit($table, $id, $data) {
+	
+		die("INSERT INTO $table (`".
+			implode("`,`", array_keys($data))."`) VALUES (".
+			implode(',', array_fill(0, count($data), '?')).")");	
 		$stmt = $this->prepare("UPDATE $table SET ".$this->arrayToPDOstr($data)." WHERE id = ? ");
 		$data[] = $id;
 		if ($stmt->execute(array_values($data))) {
@@ -75,9 +82,15 @@ class ezCMS extends db {
 		} 
 		return false;
 	}
+
+	// this function will set the formatted html to display
+	public function setMsgHTML ($class, $caption, $subcaption ) {
+		$this->msg = '<div class="alert alert-'.$class.'">
+			<button type="button" class="close" data-dismiss="alert">x</button>
+			<strong>'.$caption.'</strong><br>'.$subcaption.'</div>';
+	}
 	
-	protected  function fetchPOSTData($f) { 
-		$d = array(); 
+	protected  function fetchPOSTData($f, &$d) { 
 		foreach($f as $k) {
 			if (isset($_POST[$k])) {
 				$d[$k] = trim($_POST[$k]); 
@@ -86,12 +99,19 @@ class ezCMS extends db {
 				die('BAD REQUEST');
 			}
 		}
-		return $d; 
+	}
+
+	protected  function fetchPOSTCheck($f, &$d) { 
+		foreach($f as $k) {
+			$d[$k] = (isset($_POST[$k])) ? 1 : 0;
+		}
 	}
 	
 	private function arrayToPDOstr($a) { 
 		$t = array(); 
-		foreach (array_keys($a) as $n) $t[] = "`$n` = ?"; 
+		foreach (array_keys($a) as $n) {
+			$t[] = "`$n` = ?"; 
+		}
 		return implode(', ', $t); 
 	}	
 

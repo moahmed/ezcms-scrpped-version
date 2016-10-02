@@ -31,7 +31,7 @@
 		  <li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-large"></i> Template <b class="caret"></b></a>
 			  <ul class="dropdown-menu">
-				<li><a href="setting.php"><i class="icon-th-list"></i> Settings</a></li>
+				<li><a href="setting.php"><i class="icon-th-list"></i> Defaults</a></li>
 				<li><a href="controllers.php"><i class="icon-play"></i> Router</a></li>
 				<li class="divider"></li>
 				<li><a href="layouts.php"><i class="icon-list-alt"></i> Layouts</a></li>
