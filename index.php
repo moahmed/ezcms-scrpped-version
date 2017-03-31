@@ -48,7 +48,7 @@ $site = $dbh->query('SELECT * FROM `site` ORDER BY `id` DESC LIMIT 1')
 $uri = strtok($_SERVER["REQUEST_URI"],'?'); // get the requested URI
 
 // **************** PAGE DETAILS ****************
-$stmt = $dbh->prepare('SELECT * FROM `pages` WHERE `url` = ? ORDER BY `id` DESC LIMIT 1');
+$stmt = $dbh->prepare('SELECT * FROM `pages` WHERE `url` = ? ORDER BY modify_date desc, `id` DESC LIMIT 1');
 $stmt->execute( array($uri) );
 
 // Check if page is found in database.

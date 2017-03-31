@@ -11,7 +11,10 @@
  * it will render the content without any sidebars 
  * This is an example of how to use custom layouts.
  */
-?><!DOCTYPE html><html><head>
+?>
+<!DOCTYPE html>
+<html>
+<head>
 
     <title><?php echo $title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -26,7 +29,10 @@
     <script src="/main.js" type="text/javascript"></script>
     <?php echo $head; ?>
 	
-</head><body><div id="main">
+</head>
+
+<body>
+<div id="main">
 
     <div id="header">
     	<?php echo $header; ?>
@@ -40,4 +46,7 @@
     	<?php echo $footer; ?>
     </div>
     
-</div></body></html>
+</div>
+</body>
+
+</html>

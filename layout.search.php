@@ -82,7 +82,9 @@ if (isset($_GET['term'])) {
 }
  
 ?>
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html>
+<head>
 
     <title><?php echo $title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -121,7 +123,9 @@ if (isset($_GET['term'])) {
 	});
 	</script>
 
-</head><body><div id="main">
+</head>
+<body>
+<div id="main">
 
     <div id="header"><?php echo $header; ?></div>
     
@@ -154,4 +158,6 @@ if (isset($_GET['term'])) {
     
     <div id="footer"><?php echo $footer; ?></div>
     
-</div></body></html>
+</div>
+</body>
+</html>

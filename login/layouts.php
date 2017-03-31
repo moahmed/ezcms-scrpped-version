@@ -15,7 +15,10 @@ require_once ("class/layouts.class.php");
 // **************** ezCMS LAYOUTS HANDLE ****************
 $cms = new ezLayouts(); 
 
-?><!DOCTYPE html><html lang="en"><head>
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
 	<title>Layouts : ezCMS Admin</title>
 	<?php include('include/head.php'); ?>

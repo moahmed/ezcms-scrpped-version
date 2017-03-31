@@ -31,7 +31,7 @@ function getEntryHTML($row) {
 }
 
  
-// Recurrsively fetch all the pages from the database
+// Recursively fetch all the pages from the database
 function getSiteMap($id) {
 	$sql = "SELECT `id` , `title` , `url`, `published`, `description`, `keywords` " .
 			"FROM  `pages` WHERE `parentid` = $id ORDER BY `place`";		
@@ -50,7 +50,10 @@ function getSiteMap($id) {
      	echo '</ul>';
      }
 }
-?><!DOCTYPE html><html><head>
+?>
+<!DOCTYPE html>
+<html>
+<head>
 
     <title><?php echo $title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -100,4 +103,6 @@ function getSiteMap($id) {
     
     <div id="footer"><?php echo $footer; ?></div>
     
-</div></body></html>
+</div>
+</body>
+</html>
